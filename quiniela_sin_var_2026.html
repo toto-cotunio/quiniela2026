@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiniela "sin VAR" — Mundial 2026</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f4f6fa;padding:2rem 1rem;color:#1a1a2e}
+h1.page-title{text-align:center;font-size:1.5rem;font-weight:600;color:#1a237e;margin-bottom:.4rem}
+p.page-sub{text-align:center;font-size:.85rem;color:#666;margin-bottom:2rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(540px,1fr));gap:2rem;max-width:1200px;margin:0 auto}
+.card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.08);border:1px solid #e8e8ee}
+.card-header{background:#1a237e;padding:16px 20px;display:flex;align-items:center;gap:14px}
+.avatar{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;color:#fff;flex-shrink:0;letter-spacing:.03em}
+.hname{font-size:15px;font-weight:600;color:#fff;line-height:1.2}
+.hsub{font-size:11.5px;color:rgba(255,255,255,.72);margin-top:3px}
+.section{padding:12px 18px}
+.sec-title{font-size:10px;font-weight:600;letter-spacing:.08em;color:#888;text-transform:uppercase;margin-bottom:9px}
+.divider{height:1px;background:#f0f0f5}
+.grupo-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:7px}
+.grupo-box{border:1px solid #eaecf5;border-radius:8px;padding:7px 6px;text-align:center;background:#fafbff}
+.grupo-letter{font-size:9.5px;font-weight:600;color:#9fa8da;margin-bottom:3px;letter-spacing:.05em}
+.grupo-1{font-size:11.5px;font-weight:600;color:#1a237e;line-height:1.2}
+.grupo-2{font-size:10.5px;color:#888;margin-top:2px;line-height:1.2}
+.pill-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.pill-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:5px}
+.pill{background:#f3f4ff;border:1px solid #e0e2f8;border-radius:20px;padding:5px 8px;font-size:11.5px;text-align:center;color:#3949ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.final-boxes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:12px 18px}
+.fbox{border-radius:10px;padding:12px 10px;text-align:center;border:1px solid #e8e8ee}
+.fbox.camp{background:#fff9e6;border-color:#f9a825}
+.fbox.sub{background:#fafafa;border-color:#ddd}
+.fbox.gol{background:#f0f7e8;border-color:#8bc34a}
+.fbox-label{font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px}
+.camp .fbox-label{color:#e65100}
+.gol .fbox-label{color:#33691e}
+.sub .fbox-label{color:#777}
+.fbox-val{font-size:13px;font-weight:600;color:#1a1a2e;line-height:1.3}
+.card-footer{background:#f8f9fd;padding:10px 18px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #f0f0f5}
+.footer-pts{font-size:11.5px;color:#888}
+.footer-btn{background:#1a237e;color:#fff;border:none;border-radius:7px;padding:6px 13px;font-size:11.5px;font-weight:500;cursor:default}
+.num-badge{display:inline-block;background:#e8eaf6;color:#3949ab;font-size:10px;font-weight:600;border-radius:10px;padding:2px 7px;margin-left:8px;vertical-align:middle}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.grupo-grid{grid-template-columns:repeat(3,1fr)}.pill-grid{grid-template-columns:repeat(2,1fr)}.final-boxes{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<h1 class="page-title">⚽ Quiniela "sin VAR" — Mundial 2026</h1>
+<p class="page-sub">28 participantes · Máximo posible: 178 pts · Verificación pública</p>
+<div class="grid" id="cards"></div>
+<script>
+const GROUPS = ['A','B','C','D','E','F','G','H','I','J','K','L'];
+
+const rows = [
+["5/20/2026 18:27:43","Chalo Solares (hijo)","55144476","Sudafrica","Corea del Sur","Suiza","Bosnia y Herzegovina","Brasil","Marruecos","Turquia","Estados Unidos","Alemania","Costa de Marfil","Holanda","Japon","Belgica","Egipto","España","Uruguay","Francia","Noruega","Argentina","Austria","Portugal","Colombia","Croacia","Inglaterra","Senegal, Mexico, Canada, Costa de Marfil, Escocia, Tunez, Ghana, Nueva Zelanda","Francia, España, Portugal, Brasil, Holanda, Croacia, Uruguay, Turquia","Portugal, Brasil, Holanda, Turquia","Portugal, Turquia","Cristiano Ronaldo","Turquia","Portugal","Francia, España, Inglaterra, Portugal, Brasil, Holanda, Belgica, Alemania, Croacia, Estados Unidos, Uruguay, Suiza, Turquia, Noruega, Sudafrica, Bosnia y Herzegovina"],
+["5/21/2026 14:22:16","Gerardo Antonio Brenes Trejos","83806840","Mexico","Corea del Sur","Suiza","Canada","Brasil","Marruecos","Estados Unidos","Turquia","Alemania","Ecuador","Holanda","Japon","Belgica","Egipto","España","Uruguay","Francia","Senegal","Argentina","Austria","Portugal","Colombia","Inglaterra","Croacia"," Paraguay, Canada, Noruega, Costa de Marfil, Suecia, Republica Checa, Arabia Saudita, Ghana","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Alemania, Croacia","Francia, Argentina, Inglaterra, Brasil","Francia, Brasil","Kylian Mbappé","Francia","Brasil","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Marruecos, Belgica, Alemania, Croacia, Senegal, Colombia, Estados Unidos, Mexico, Uruguay"],
+["5/23/2026 14:29:50","Freddy Aldana","42175246","Republica Checa","Corea del Sur","Suiza","Bosnia y Herzegovina","Marruecos","Brasil","Turquia","Estados Unidos","Alemania","Ecuador","Holanda","Japon","Belgica","Egipto","España","Uruguay","Francia","Noruega","Argentina","Austria","Portugal","Colombia","Inglaterra","Croacia","Senegal, Mexico, Canada, Costa de Marfil, Escocia, Paraguay, Suecia, Ghana","Francia, España, Argentina, Inglaterra, Portugal, Holanda, Marruecos, Senegal","Francia, España, Argentina, Marruecos","Francia, Argentina","Kylian Mbappé","Argentina","Francia","Francia, España, Argentina, Inglaterra, Portugal, Holanda, Marruecos, Belgica, Alemania, Senegal, Colombia, Estados Unidos, Suiza, Ecuador, Costa de Marfil, Bosnia y Herzegovina"],
+["5/23/2026 15:36:02","Carlos Cuesta","52026094","Mexico","Corea del Sur","Canada","Suiza","Brasil","Escocia","Estados Unidos","Paraguay","Alemania","Ecuador","Holanda","Suecia","Belgica","Nueva Zelanda","España","Uruguay","Francia","Noruega","Argentina","Austria","Portugal","Colombia","Inglaterra","Croacia","Marruecos, Senegal, Japon, Austria, Egipto, Qatar, Uzbekistan, Ghana","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Belgica","Francia, España, Inglaterra, Argentina","España, Argentina","Kylian Mbappé","Argentina","España","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Belgica, Alemania, Croacia, Senegal, Suiza, Japon, Austria, Noruega, Paraguay"],
+["5/27/2026 17:37:06","Oscar Humberto Aldana Hernandez","59191601","Mexico","Republica Checa","Suiza","Canada","Brasil","Escocia","Estados Unidos","Turquia","Alemania","Costa de Marfil","Holanda","Japon","Belgica","Iran","España","Uruguay","Francia","Senegal","Argentina","Austria","Portugal","Colombia","Inglaterra","Croacia","Corea del Sur, Argelia, Egipto, Noruega, Escocia, Paraguay, Suecia, Bosnia y Herzegovina","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Belgica, Alemania","Francia, España, Argentina, Brasil","Francia, Brasil","Kylian Mbappé","Francia","Brasil","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Belgica, Alemania, Colombia, Estados Unidos, Mexico, Suiza, Japon, Ecuador, Turquia, Escocia"],
+["5/27/2026 17:37:07","Oscar Javier Aldana Rodas","58619226","Mexico","Corea del Sur","Suiza","Bosnia y Herzegovina","Brasil","Marruecos","Turquia","Estados Unidos","Alemania","Ecuador","Holanda","Japon","Belgica","Egipto","España","Uruguay","Francia","Noruega","Argentina","Austria","Portugal","Colombia","Inglaterra","Croacia","Argelia, Canada, Costa de Marfil, Escocia, Paraguay, Suecia, Republica Checa, Arabia Saudita","Francia, España, Argentina, Inglaterra, Portugal, Holanda, Belgica, Noruega","Francia, España, Argentina, Inglaterra","España, Argentina","Kylian Mbappé","España","Argentina","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Belgica, Alemania, Colombia, Estados Unidos, Mexico, Suiza, Corea del Sur, Turquia, Noruega"],
+["5/31/2026 11:15:54","Álvaro Navarro","54144670","Mexico","Corea del Sur","Suiza","Canada","Brasil","Marruecos","Estados Unidos","Turquia","Alemania","Ecuador","Holanda","Japon","Belgica","Iran","España","Uruguay","Francia","Noruega","Argentina","Austria","Portugal","Colombia","Inglaterra","Croacia","Senegal, Costa de Marfil, Escocia, Paraguay, Suecia, Arabia Saudita, Uzbekistan, Ghana","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Alemania","Francia, España, Inglaterra, Brasil","España, Brasil","Lamine Yamal","Brasil","España","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Marruecos, Belgica, Alemania, Croacia, Senegal, Colombia, Estados Unidos, Mexico, Japon"],
+["5/31/2026 14:33:57","Jesús Rolando Sánchez Cabrera","50500763","Corea del Sur","Sudafrica","Suiza","Canada","Brasil","Marruecos","Australia","Estados Unidos","Alemania","Ecuador","Holanda","Japon","Belgica","Nueva Zelanda","España","Uruguay","Francia","Noruega","Argentina","Austria","Portugal","Colombia","Inglaterra","Croacia","Senegal, Mexico, Argelia, Egipto, Escocia, Suecia, Bosnia y Herzegovina, Ghana","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Belgica","Francia, España, Argentina, Inglaterra","España, Argentina","Julián Álvarez","España","Argentina","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Belgica, Alemania, Colombia, Suiza, Corea del Sur, Australia, Noruega, Sudafrica, Nueva Zelanda"],
+["5/31/2026 21:01:06","Luis Hernández Bocaletti","43935356","Mexico","Corea del Sur","Canada","Suiza","Brasil","Marruecos","Estados Unidos","Turquia","Alemania","Ecuador","Holanda","Suecia","Belgica","Egipto","España","Uruguay","Francia","Noruega","Argentina","Austria","Portugal","Colombia","Inglaterra","Croacia","Senegal, Japon, Iran, Australia, Escocia, Qatar, Arabia Saudita, Ghana","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Belgica","Francia, España, Argentina, Brasil","Francia, España","Kylian Mbappé","Francia","España","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Marruecos, Belgica, Alemania, Croacia, Colombia, Estados Unidos, Mexico, Japon, Noruega"],
+["5/31/2026 23:20:27","Nicolás Yee Melgar","39054776","Sudafrica","Republica Checa","Suiza","Canada","Brasil","Marruecos","Paraguay","Estados Unidos","Alemania","Ecuador","Holanda","Japon","Belgica","Iran","España","Uruguay","Francia","Noruega","Argentina","Austria","Colombia","Portugal","Inglaterra","Croacia","Senegal, Mexico, Corea del Sur, Turquia, Costa de Marfil, Escocia, Tunez, Ghana","Francia, España, Argentina, Inglaterra, Brasil, Holanda, Alemania, Croacia","Francia, España, Argentina, Croacia","España, Argentina","Kylian Mbappé","España","Argentina","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Alemania, Croacia, Colombia, Uruguay, Japon, Ecuador, Noruega, Paraguay, Sudafrica"],
+["6/1/2026 18:14:41","Adrian Solares","47554619","Mexico","Corea del Sur","Suiza","Canada","Brasil","Marruecos","Turquia","Estados Unidos","Alemania","Ecuador","Holanda","Suecia","Belgica","Egipto","España","Uruguay","Francia","Noruega","Argentina","Austria","Portugal","Colombia","Inglaterra","Croacia","Japon, Iran, Corea del Sur, Costa de Marfil, Escocia, Paraguay, Qatar, Arabia Saudita","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Belgica","Francia, España, Argentina, Inglaterra","España, Argentina","Ferran Torres","Argentina","España","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Belgica, Alemania, Croacia, Mexico, Suiza, Corea del Sur, Turquia, Egipto, Noruega"],
+["6/1/2026 20:50:36","Yuri Solares","53434367","Mexico","Corea del Sur","Canada","Suiza","Brasil","Escocia","Estados Unidos","Paraguay","Alemania","Ecuador","Holanda","Japon","Belgica","Iran","España","Uruguay","Francia","Senegal","Argentina","Austria","Portugal","Colombia","Inglaterra","Croacia","Australia, Egipto, Noruega, Costa de Marfil, Suecia, Arabia Saudita, Ghana, Haiti","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Belgica","Francia, España, Argentina, Brasil","Francia, Brasil","Leonel Messi","Francia","Brasil","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Belgica, Alemania, Croacia, Senegal, Mexico, Corea del Sur, Canada, Paraguay, Suecia"],
+["6/2/2026 12:05:03","Elvira Alejandra Cerna Lopez","50373982341","Mexico","Corea del Sur","Suiza","Canada","Brasil","Marruecos","Estados Unidos","Turquia","Alemania","Ecuador","Holanda","Japon","Belgica","Iran","España","Uruguay","Francia","Senegal","Argentina","Austria","Portugal","Colombia","Inglaterra","Croacia","Argelia, Egipto, Noruega, Costa de Marfil, Escocia, Suecia, Republica Checa, Ghana","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Alemania, Uruguay","Francia, España, Argentina, Inglaterra","Francia, Argentina","Kylian Mbappé","Argentina","Francia","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Marruecos, Belgica, Alemania, Croacia, Colombia, Estados Unidos, Mexico, Uruguay, Japon"],
+["6/2/2026 14:24:48","Gonzalo Solares (Papá)","42172268","Republica Checa","Mexico","Suiza","Canada","Brasil","Marruecos","Turquia","Estados Unidos","Alemania","Ecuador","Holanda","Suecia","Belgica","Egipto","España","Uruguay","Francia","Noruega","Argentina","Austria","Portugal","Colombia","Inglaterra","Croacia","Senegal, Japon, Iran, Corea del Sur, Argelia, Escocia, Paraguay, Arabia Saudita","España, Argentina, Inglaterra, Portugal, Holanda, Alemania, Turquia, Noruega","España, Inglaterra, Portugal, Alemania","España, Portugal","Harry Kane","España","Portugal","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Belgica, Alemania, Colombia, Suiza, Turquia, Canada, Egipto, Noruega, Republica Checa"],
+["6/2/2026 20:13:18","Sebastian Navarro","55614909","Mexico","Corea del Sur","Suiza","Canada","Brasil","Marruecos","Estados Unidos","Paraguay","Alemania","Ecuador","Holanda","Japon","Belgica","Egipto","España","Uruguay","Francia","Noruega","Argentina","Austria","Portugal","Colombia","Inglaterra","Croacia","Senegal, Argelia, Australia, Costa de Marfil, Escocia, Suecia, Qatar, Arabia Saudita","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Croacia","Francia, España, Argentina, Portugal","Francia, España","Kylian Mbappé","Francia","España","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Marruecos, Belgica, Alemania, Croacia, Colombia, Estados Unidos, Mexico, Uruguay, Suiza"],
+["6/3/2026 20:47:19","Neluca Solares","8184726463","Mexico","Corea del Sur","Suiza","Canada","Brasil","Marruecos","Turquia","Estados Unidos","Alemania","Ecuador","Holanda","Japon","Belgica","Iran","España","Uruguay","Francia","Noruega","Argentina","Austria","Portugal","Colombia","Inglaterra","Croacia","Egipto, Costa de Marfil, Escocia, Paraguay, Suecia, Republica Checa, Bosnia y Herzegovina, Cabo Verde","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Marruecos, Belgica","Francia, España, Argentina, Inglaterra","España, Argentina","Harry Kane","España","Argentina","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Marruecos, Belgica, Alemania, Colombia, Mexico, Suiza, Iran, Turquia, Canada, Noruega"],
+["6/4/2026 14:42:43","Jose Antonio Celis Infante","50378944684","Mexico","Corea del Sur","Suiza","Canada","Brasil","Marruecos","Estados Unidos","Turquia","Alemania","Ecuador","Holanda","Japon","Belgica","Egipto","España","Uruguay","Francia","Senegal","Argentina","Austria","Portugal","Colombia","Inglaterra","Croacia","Iran, Argelia, Australia, Noruega, Costa de Marfil, Escocia, Suecia, Sudafrica","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Belgica","Francia, España, Argentina, Inglaterra","España, Argentina","Kylian Mbappé","Argentina","España","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Belgica, Alemania, Senegal, Colombia, Estados Unidos, Mexico, Suiza, Corea del Sur, Turquia"],
+["6/4/2026 22:49:29","Roberto Quezada De la Peña","528711375112","Mexico","Corea del Sur","Suiza","Canada","Brasil","Marruecos","Estados Unidos","Turquia","Alemania","Ecuador","Holanda","Japon","Belgica","Iran","España","Uruguay","Francia","Noruega","Argentina","Austria","Portugal","Colombia","Inglaterra","Croacia","Senegal, Japon, Argelia, Escocia, Paraguay, RD Congo, Qatar, Sudafrica","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Alemania, Mexico","Francia, España, Portugal, Alemania","España, Brasil","Kylian Mbappé","España","Brasil","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Marruecos, Belgica, Alemania, Croacia, Colombia, Mexico, Uruguay, Suiza, Japon"],
+["6/6/2026 15:41:32","Reynaldo José Dinarte Díaz","50375795326","Mexico","Corea del Sur","Suiza","Canada","Brasil","Marruecos","Estados Unidos","Turquia","Alemania","Costa de Marfil","Holanda","Suecia","Belgica","Egipto","España","Uruguay","Francia","Noruega","Argentina","Austria","Portugal","Colombia","Inglaterra","Croacia","Iran, Ecuador, Argelia, Republica Checa, Arabia Saudita, Panama, Uzbekistan, Bosnia y Herzegovina","Francia, España, Argentina, Portugal, Holanda, Alemania, Colombia, Uruguay","Francia, España, Portugal, Brasil","Francia, España","Kylian Mbappé","Francia","España","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Alemania, Uruguay, Japon, Corea del Sur, Turquia, Canada, Costa de Marfil, Suecia, Ghana"],
+["6/6/2026 17:41:16","Carlos Paz Urrutia","52012991","Corea del Sur","Mexico","Suiza","Canada","Brasil","Marruecos","Turquia","Paraguay","Alemania","Costa de Marfil","Holanda","Japon","Belgica","Egipto","España","Uruguay","Francia","Senegal","Argentina","Argelia","Portugal","Colombia","Inglaterra","Ghana","Croacia, Estados Unidos, Ecuador, Austria, Noruega, Escocia, RD Congo, Arabia Saudita","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Belgica","España, Argentina, Inglaterra, Holanda","España, Argentina","Harry Kane","España","Argentina","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Belgica, Alemania, Colombia, Mexico, Austria, Turquia, Noruega, Costa de Marfil, Paraguay"],
+["6/7/2026 14:00:41","Osly Rolando Domínguez Paz","36968744","Mexico","Corea del Sur","Canada","Suiza","Brasil","Marruecos","Estados Unidos","Turquia","Alemania","Costa de Marfil","Holanda","Japon","Belgica","Egipto","España","Uruguay","Francia","Noruega","Argentina","Austria","Portugal","Colombia","Inglaterra","Croacia","Senegal, Ecuador, Argelia, Escocia, Paraguay, Suecia, Qatar, Arabia Saudita","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Alemania","Francia, España, Argentina, Brasil","Francia, Argentina","Kylian Mbappé","Argentina","Francia","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Marruecos, Belgica, Alemania, Colombia, Estados Unidos, Uruguay, Japon, Austria, Noruega"],
+["6/7/2026 16:57:28","Renato Marcelo Roverso","50377407575","Mexico","Corea del Sur","Suiza","Canada","Brasil","Marruecos","Paraguay","Estados Unidos","Alemania","Ecuador","Holanda","Suecia","Belgica","Egipto","España","Uruguay","Francia","Senegal","Argentina","Argelia","Portugal","Colombia","Inglaterra","Croacia","Colombia, Estados Unidos, Japon, Austria, Noruega, Paraguay, Suecia, Ghana","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Alemania","Francia, España, Argentina, Brasil","Francia, Argentina","Kylian Mbappé","Argentina","Francia","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Marruecos, Belgica, Alemania, Croacia, Mexico, Uruguay, Ecuador, Noruega, Paraguay"],
+["6/7/2026 18:36:26","Gustavo Adolfo Ovalle Castilla","58303979","Corea del Sur","Mexico","Suiza","Canada","Brasil","Escocia","Estados Unidos","Turquia","Alemania","Costa de Marfil","Holanda","Suecia","Belgica","Egipto","Uruguay","España","Francia","Noruega","Argentina","Austria","Colombia","Portugal","Croacia","Inglaterra","Iran, Argelia, Noruega, Costa de Marfil, Paraguay, Suecia, RD Congo, Ghana","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Alemania","Francia, España, Argentina, Inglaterra","España, Inglaterra","Harry Kane","Inglaterra","España","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Belgica, Alemania, Croacia, Colombia, Estados Unidos, Mexico, Turquia, Canada, Sudafrica"],
+["6/7/2026 18:36:30","Gustavo Adolfo Ovalle Armas","47391517","Mexico","Corea del Sur","Canada","Suiza","Brasil","Marruecos","Turquia","Estados Unidos","Alemania","Ecuador","Holanda","Japon","Belgica","Egipto","España","Uruguay","Francia","Senegal","Argentina","Austria","Portugal","Colombia","Inglaterra","Croacia","Iran, Argelia, Noruega, Costa de Marfil, Paraguay, Suecia, RD Congo, Ghana","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Alemania","Francia, España, Argentina, Alemania","Francia, España","Kylian Mbappé","Francia","España","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Belgica, Alemania, Croacia, Colombia, Estados Unidos, Mexico, Uruguay, Japon, Turquia"],
+["6/7/2026 19:25:09","Antonio García Salas Jacobs","58809258","Mexico","Corea del Sur","Suiza","Canada","Brasil","Marruecos","Estados Unidos","Turquia","Alemania","Ecuador","Holanda","Japon","Belgica","Egipto","España","Uruguay","Francia","Noruega","Argentina","Austria","Portugal","Colombia","Inglaterra","Croacia","Croacia, Corea del Sur, Costa de Marfil, Escocia, Suecia, Republica Checa, Qatar, Ghana","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Alemania","Francia, España, Argentina, Alemania","España, Alemania","Kylian Mbappé","Alemania","España","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Marruecos, Belgica, Alemania, Croacia, Senegal, Colombia, Estados Unidos, Mexico, Uruguay"],
+["6/8/2026 13:47:46","Sebastian Solares Morales","30046682","Republica Checa","Corea del Sur","Canada","Suiza","Brasil","Marruecos","Turquia","Estados Unidos","Alemania","Ecuador","Holanda","Japon","Belgica","Nueva Zelanda","España","Uruguay","Francia","Noruega","Argentina","Austria","Portugal","Colombia","Inglaterra","Croacia","Senegal, Argelia, Egipto, Costa de Marfil, Paraguay, Suecia, Arabia Saudita, Ghana","Francia, Inglaterra, Portugal, Brasil, Marruecos, Croacia, Uruguay, Turquia","Francia, Portugal, Brasil, Croacia","Francia, Portugal","KILIAN MBAPPE","Francia","Portugal","Francia, España, Inglaterra, Portugal, Brasil, Marruecos, Belgica, Alemania, Croacia, Estados Unidos, Uruguay, Suiza, Turquia, Egipto, Noruega, Costa de Marfil"],
+["6/8/2026 19:47:46","Mario Gutiérrez","58000222","Republica Checa","Mexico","Suiza","Bosnia y Herzegovina","Brasil","Marruecos","Turquia","Estados Unidos","Alemania","Costa de Marfil","Japon","Holanda","Egipto","Belgica","España","Arabia Saudita","Francia","Senegal","Argentina","Argelia","Portugal","Colombia","Croacia","Ghana","Inglaterra, Uruguay, Corea del Sur, Austria, Australia, Canada, Noruega, Haiti","Francia, España, Argentina, Portugal, Brasil, Croacia, Egipto, Noruega","Francia, España, Argentina, Brasil","Francia, Argentina","M. Olise","Francia","Argentina","Francia, España, Argentina, Portugal, Brasil, Belgica, Alemania, Croacia, Mexico, Suiza, Japon, Turquia, Egipto, Noruega, Costa de Marfil, Ghana"],
+["6/8/2026 21:46:48","Eric Pocasangre","50377479837","Sudafrica","Mexico","Bosnia y Herzegovina","Suiza","Brasil","Marruecos","Turquia","Estados Unidos","Alemania","Ecuador","Holanda","Japon","Egipto","Belgica","España","Uruguay","Francia","Noruega","Argentina","Jordania","Portugal","Colombia","Inglaterra","Croacia","Senegal, Iran, Corea del Sur, Canada, Suecia, Arabia Saudita, Panama, Ghana","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Marruecos, Alemania","Francia, Portugal, Brasil, Alemania","Francia, Brasil","Kylian Mbappe","Francia","Brasil","Francia, España, Argentina, Inglaterra, Portugal, Brasil, Holanda, Marruecos, Alemania, Croacia, Colombia, Uruguay, Japon, Iran, Egipto, Ghana"]
+];
+
+function initials(name){
+  const p=name.trim().split(/\s+/);
+  if(p.length>=2)return(p[0][0]+(p[1][0]||'')).toUpperCase();
+  return name.substring(0,2).toUpperCase();
+}
+
+function pills(text,cls){
+  const items=(text||'').split(',').map(s=>s.trim()).filter(Boolean);
+  if(!items.length)return'<p style="font-size:11px;color:#aaa">Sin datos</p>';
+  return`<div class="${cls}">${items.map(t=>`<div class="pill">${t}</div>`).join('')}</div>`;
+}
+
+function buildCard(row,idx){
+  const nombre=row[1];
+  const gruposRaw=row.slice(3,27);
+  const terceros=row[27]||'';
+  const cuartos=row[28]||'';
+  const semis=row[29]||'';
+  const finalistas=row[30]||'';
+  const goleador=row[31]||'-';
+  const campeon=row[32]||'-';
+  const subcampeon=row[33]||'-';
+  const octavos=row[34]||'';
+
+  const grupoBoxes=GROUPS.map((g,i)=>{
+    const p1=(gruposRaw[i*2]||'?').trim();
+    const p2=(gruposRaw[i*2+1]||'?').trim();
+    return`<div class="grupo-box"><div class="grupo-letter">Gpo ${g}</div><div class="grupo-1">${p1}</div><div class="grupo-2">${p2}</div></div>`;
+  }).join('');
+
+  const d=document.createElement('div');
+  d.className='card';
+  d.innerHTML=`
+<div class="card-header">
+  <div class="avatar">${initials(nombre)}</div>
+  <div>
+    <div class="hname">${nombre}</div>
+    <div class="hsub">Quiniela "sin VAR" del Mundial 2026</div>
+  </div>
+</div>
+<div class="section">
+  <div class="sec-title">Primeros y segundos de grupo</div>
+  <div class="grupo-grid">${grupoBoxes}</div>
+</div>
+<div class="divider"></div>
+<div class="section">
+  <div class="sec-title">8 Terceros que avanzan</div>
+  ${pills(terceros,'pill-grid')}
+</div>
+<div class="divider"></div>
+<div class="section">
+  <div class="sec-title">Octavos de final — 16 equipos</div>
+  ${pills(octavos,'pill-grid')}
+</div>
+<div class="divider"></div>
+<div class="section">
+  <div class="sec-title">Cuartos de final</div>
+  ${pills(cuartos,'pill-grid')}
+</div>
+<div class="divider"></div>
+<div class="section">
+  <div class="sec-title">Semifinalistas</div>
+  ${pills(semis,'pill-grid')}
+</div>
+<div class="divider"></div>
+<div class="section">
+  <div class="sec-title">Finalistas</div>
+  ${pills(finalistas,'pill-grid-2')}
+</div>
+<div class="divider"></div>
+<div class="final-boxes">
+  <div class="fbox camp"><div class="fbox-label">Campeón</div><div class="fbox-val">${campeon}</div></div>
+  <div class="fbox sub"><div class="fbox-label">Subcampeón</div><div class="fbox-val">${subcampeon}</div></div>
+  <div class="fbox gol"><div class="fbox-label">Goleador</div><div class="fbox-val">${goleador}</div></div>
+</div>
+<div class="card-footer">
+  <span class="footer-pts">Máx posible: 178 pts</span>
+  <button class="footer-btn">Pendiente de resultados</button>
+</div>`;
+  return d;
+}
+
+const grid=document.getElementById('cards');
+rows.forEach((r,i)=>grid.appendChild(buildCard(r,i)));
+</script>
+</body>
+</html>
