@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resultados — Quiniela sin VAR del Mundial 2026</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f4f6f9;
+      padding: 24px 16px;
+      min-height: 100vh;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .header {
+      background: #1a237e;
+      border-radius: 12px 12px 0 0;
+      padding: 20px 28px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .header-left { display: flex; align-items: center; gap: 14px; }
+    .header-icon {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center; font-size: 22px;
+    }
+    .header h1 { font-size: 20px; font-weight: 500; color: #fff; }
+    .header-sub { display: flex; align-items: center; gap: 10px; margin-top: 4px; flex-wrap: wrap; }
+    .header p { font-size: 13px; color: rgba(255,255,255,0.65); }
+    .header-date {
+      font-size: 12px; color: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.12);
+      border: 0.5px solid rgba(255,255,255,0.25);
+      border-radius: 20px; padding: 2px 10px;
+    }
+    .badge-live {
+      background: rgba(255,255,255,0.15); color: #fff;
+      border: 0.5px solid rgba(255,255,255,0.3);
+      border-radius: 20px; padding: 5px 12px; font-size: 12px; white-space: nowrap;
+    }
+
+    .gol-bar {
+      background: #f0f7e8; border-bottom: 0.5px solid #a5d6a7;
+      padding: 12px 28px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    }
+    .gol-bar label { font-size: 14px; color: #2e7d32; font-weight: 500; white-space: nowrap; }
+    .gol-bar input {
+      border: 1px solid #a5d6a7; border-radius: 8px;
+      padding: 8px 14px; font-size: 14px;
+      background: #fff; color: #111;
+      width: 240px; outline: none;
+      font-family: inherit;
+    }
+    .gol-bar input:focus { border-color: #388e3c; }
+    .gol-badge {
+      font-size: 12px; color: #2e7d32; background: #c8e6c9;
+      border-radius: 20px; padding: 4px 12px; white-space: nowrap;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 0.5px solid #ddd; border-top: none;
+      background: #fff;
+    }
+
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+
+    thead th {
+      background: #1a237e; color: rgba(255,255,255,0.9);
+      padding: 12px 16px; text-align: center;
+      font-weight: 500; font-size: 12px;
+      border-right: 0.5px solid rgba(255,255,255,0.12);
+      white-space: nowrap; line-height: 1.4;
+    }
+    thead th:first-child { text-align: left; min-width: 200px; }
+    thead th.th-total { background: #0d47a1; }
+    thead th.th-gol   { background: #1b5e20; }
+    thead th.th-sub   { background: #37474f; }
+    thead th.th-camp  { background: #e65100; }
+
+    tbody tr { border-bottom: 0.5px solid #eee; transition: background 0.1s; }
+    tbody tr:hover { background: #f9f9f9; }
+    tbody tr:last-child { border-bottom: none; }
+
+    tbody td {
+      padding: 13px 16px; text-align: center;
+      font-size: 14px; color: #555;
+      border-right: 0.5px solid #eee;
+    }
+    tbody td:first-child { text-align: left; }
+    tbody td:last-child { border-right: none; }
+
+    .name-cell { display: flex; align-items: center; gap: 10px; }
+    .rank-num { font-size: 13px; color: #aaa; min-width: 24px; text-align: right; }
+    .avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: #e8eaf6; display: flex; align-items: center;
+      justify-content: center; font-size: 11px; font-weight: 500;
+      color: #3949ab; flex-shrink: 0;
+    }
+    .pts-leader { color: #b8860b; font-weight: 500; font-size: 16px; }
+    .pts-top    { color: #222;    font-weight: 500; font-size: 16px; }
+    .pts-rest   { color: #555;    font-weight: 500; font-size: 16px; }
+    .td-leader  { background: #fffde7; }
+    .gol-hit    { color: #2e7d32; font-weight: 500; background: #f1f8e9; }
+    .gol-miss   { color: #555; }
+    .pending    { color: #ccc; font-size: 18px; }
+
+    .footer {
+      background: #f8f9fa;
+      border-radius: 0 0 12px 12px;
+      padding: 12px 28px; display: flex; align-items: center; justify-content: space-between;
+      border: 0.5px solid #ddd; border-top: none; flex-wrap: wrap; gap: 8px;
+    }
+    .footer span { font-size: 13px; color: #666; }
+    .footer-badge {
+      background: #e8eaf6; color: #3949ab;
+      border-radius: 20px; padding: 4px 12px; font-size: 12px;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 12px 8px; }
+      .header { padding: 16px; }
+      .header h1 { font-size: 16px; }
+      .gol-bar { padding: 10px 16px; }
+      .gol-bar input { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="header-left">
+      <div class="header-icon">⚽</div>
+      <div>
+        <h1>Quiniela "sin VAR" — Mundial 2026</h1>
+        <div class="header-sub">
+          <p>Resultados parciales · Fase de grupos en curso</p>
+          <span class="header-date" id="fechaHoy"></span>
+        </div>
+      </div>
+    </div>
+    <span class="badge-live">🔴 En vivo</span>
+  </div>
+
+  <div class="gol-bar">
+    <label>⚽ Goleador actual:</label>
+    <input type="text" id="goleadorInput" placeholder="Nombre del jugador..." value="Leonel Messi" />
+    <span class="gol-badge">+10 pts al total</span>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align:left;">#&nbsp;&nbsp; Participante</th>
+          <th class="th-total">Total Parcial<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 178</span></th>
+          <th class="th-gol">Goleador<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 10</span></th>
+          <th>1°/2° Grupo<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 60</span></th>
+          <th>3°s Avanzan<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 8</span></th>
+          <th>Octavos<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 16</span></th>
+          <th>Cuartos<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 32</span></th>
+          <th>Semis<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 16</span></th>
+          <th>Finalistas<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 12</span></th>
+          <th class="th-sub">Subcampeón<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 8</span></th>
+          <th class="th-camp">Campeón<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 16</span></th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span>29 participantes · Máximo posible: <strong>178 pts</strong></span>
+    <span class="footer-badge">Grupos A–E completados</span>
+  </div>
+</div>
+
+<script>
+const rawData = [
+  { name: "Chalo Solares (hijo)",            grupos: 14, goleadorPick: "Cristiano Ronaldo" },
+  { name: "Gerardo Antonio Brenes Trejos",   grupos: 22, goleadorPick: "Kylian Mbappé" },
+  { name: "Freddy Aldana",                   grupos: 9,  goleadorPick: "Kylian Mbappé" },
+  { name: "Carlos Cuesta",                   grupos: 15, goleadorPick: "Kylian Mbappé" },
+  { name: "Oscar Humberto Aldana Hernandez", grupos: 20, goleadorPick: "Kylian Mbappé" },
+  { name: "Oscar Javier Aldana Rodas",       grupos: 17, goleadorPick: "Kylian Mbappé" },
+  { name: "Álvaro Navarro",                  grupos: 22, goleadorPick: "Lamine Yamal" },
+  { name: "Jesús Rolando Sánchez Cabrera",   grupos: 18, goleadorPick: "Julián Álvarez" },
+  { name: "Luis Hernández Bocaletti",        grupos: 17, goleadorPick: "Kylian Mbappé" },
+  { name: "Nicolás Yee Melgar",             grupos: 16, goleadorPick: "Kylian Mbappé" },
+  { name: "Adrian Solares",                  grupos: 19, goleadorPick: "Ferran Torres" },
+  { name: "Yuri Solares",                    grupos: 15, goleadorPick: "Leonel Messi" },
+  { name: "Elvira Alejandra Cerna Lopez",    grupos: 22, goleadorPick: "Kylian Mbappé" },
+  { name: "Chalo Solares (Papá)",            grupos: 16, goleadorPick: "Harry Kane" },
+  { name: "Sebastian Navarro",               grupos: 22, goleadorPick: "Kylian Mbappé" },
+  { name: "Neluca Solares",                  grupos: 19, goleadorPick: "Harry Kane" },
+  { name: "Jose Antonio Celis Infante",      grupos: 22, goleadorPick: "Kylian Mbappé" },
+  { name: "Roberto Quezada De la Peña",      grupos: 22, goleadorPick: "Kylian Mbappé" },
+  { name: "Reynaldo José Dinarte Díaz",      grupos: 22, goleadorPick: "Kylian Mbappé" },
+  { name: "Carlos Paz Urrutia",             grupos: 16, goleadorPick: "Harry Kane" },
+  { name: "Osly Rolando Domínguez Paz",     grupos: 17, goleadorPick: "Kylian Mbappé" },
+  { name: "Renato Marcelo Roverso",          grupos: 19, goleadorPick: "Kylian Mbappé" },
+  { name: "Gustavo Adolfo Ovalle Castilla", grupos: 17, goleadorPick: "Harry Kane" },
+  { name: "Gustavo Adolfo Ovalle Armas",    grupos: 14, goleadorPick: "Kylian Mbappé" },
+  { name: "Antonio García Salas Jacobs",    grupos: 22, goleadorPick: "Kylian Mbappé" },
+  { name: "Sebastian Solares Morales",      grupos: 11, goleadorPick: "Kylian Mbappé" },
+  { name: "Mario Gutiérrez",                grupos: 14, goleadorPick: "M. Olise" },
+  { name: "Eric Pocasangre",                grupos: 11, goleadorPick: "Kylian Mbappe" },
+  { name: "Saúl Eduardo Donis Granados",    grupos: 19, goleadorPick: "Erling Haaland" },
+];
+
+const dias   = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
+const meses  = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+const hoy    = new Date();
+document.getElementById('fechaHoy').textContent =
+  dias[hoy.getDay()] + ', ' + hoy.getDate() + ' de ' + meses[hoy.getMonth()];
+
+function norm(s) {
+  return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9 ]/g,"").trim();
+}
+function initials(name) {
+  return name.split(' ').filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join('');
+}
+
+function renderTable(goleadorActual) {
+  const normActual = norm(goleadorActual);
+  const computed = rawData.map(p => {
+    const acierta = normActual && norm(p.goleadorPick) === normActual;
+    return { ...p, acierta, total: p.grupos + (acierta ? 10 : 0) };
+  });
+  computed.sort((a,b) => b.total - a.total);
+
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = '';
+  computed.forEach((p, i) => {
+    const rank = i + 1;
+    const medal = rank === 1 ? '🥇 ' : '';
+    const nameW = rank === 1 ? 'color:#b8860b;font-weight:500;' : rank <= 3 ? 'font-weight:500;' : '';
+    const ptsC  = rank === 1 ? 'pts-leader' : rank <= 3 ? 'pts-top' : 'pts-rest';
+    const tdL   = rank === 1 ? ' td-leader' : '';
+
+    const golCell = p.acierta
+      ? `<td class="gol-hit">${p.goleadorPick} ✓</td>`
+      : `<td class="gol-miss">${p.goleadorPick}</td>`;
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>
+        <div class="name-cell">
+          <span class="rank-num">${rank}</span>
+          <div class="avatar">${initials(p.name)}</div>
+          <span style="font-size:14px;${nameW}">${medal}${p.name}</span>
+        </div>
+      </td>
+      <td class="${tdL}"><span class="${ptsC}">${p.total} pts</span></td>
+      ${golCell}
+      <td>${p.grupos}</td>
+      <td class="pending">—</td>
+      <td class="pending">—</td>
+      <td class="pending">—</td>
+      <td class="pending">—</td>
+      <td class="pending">—</td>
+      <td class="pending">—</td>
+      <td class="pending">—</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+renderTable('Leonel Messi');
+
+let debounce;
+document.getElementById('goleadorInput').addEventListener('input', function() {
+  clearTimeout(debounce);
+  debounce = setTimeout(() => renderTable(this.value.trim()), 300);
+});
+</script>
+</body>
+</html>
