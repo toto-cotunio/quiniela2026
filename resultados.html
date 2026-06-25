@@ -6,120 +6,52 @@
   <title>Resultados — Quiniela sin VAR del Mundial 2026</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #f4f6f9;
-      padding: 24px 16px;
-      min-height: 100vh;
-    }
-    .container { max-width: 1100px; margin: 0 auto; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f4f6f9; padding: 24px 16px; min-height: 100vh; }
+    .container { max-width: 900px; margin: 0 auto; }
 
-    .header {
-      background: #1a237e;
-      border-radius: 12px 12px 0 0;
-      padding: 20px 28px;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 12px;
-    }
+    .header { background: #1a237e; border-radius: 12px 12px 0 0; padding: 20px 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
     .header-left { display: flex; align-items: center; gap: 14px; }
-    .header-icon {
-      width: 48px; height: 48px; border-radius: 50%;
-      background: rgba(255,255,255,0.15);
-      display: flex; align-items: center; justify-content: center; font-size: 22px;
-    }
+    .header-icon { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-size: 22px; }
     .header h1 { font-size: 20px; font-weight: 500; color: #fff; }
     .header-sub { display: flex; align-items: center; gap: 10px; margin-top: 4px; flex-wrap: wrap; }
     .header p { font-size: 13px; color: rgba(255,255,255,0.65); }
-    .header-date {
-      font-size: 12px; color: rgba(255,255,255,0.9);
-      background: rgba(255,255,255,0.12);
-      border: 0.5px solid rgba(255,255,255,0.25);
-      border-radius: 20px; padding: 2px 10px;
-    }
-    .badge-live {
-      background: rgba(255,255,255,0.15); color: #fff;
-      border: 0.5px solid rgba(255,255,255,0.3);
-      border-radius: 20px; padding: 5px 12px; font-size: 12px; white-space: nowrap;
-    }
+    .header-date { font-size: 12px; color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.12); border: 0.5px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 2px 10px; }
+    .badge-live { background: rgba(255,255,255,0.15); color: #fff; border: 0.5px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 5px 12px; font-size: 12px; white-space: nowrap; }
 
-    .gol-bar {
-      background: #f0f7e8; border-bottom: 0.5px solid #a5d6a7;
-      padding: 12px 28px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
-    }
+    .gol-bar { background: #f0f7e8; border-bottom: 0.5px solid #a5d6a7; padding: 12px 28px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
     .gol-bar label { font-size: 14px; color: #2e7d32; font-weight: 500; white-space: nowrap; }
-    .gol-bar input {
-      border: 1px solid #a5d6a7; border-radius: 8px;
-      padding: 8px 14px; font-size: 14px;
-      background: #fff; color: #111;
-      width: 240px; outline: none;
-      font-family: inherit;
-    }
+    .gol-bar input { border: 1px solid #a5d6a7; border-radius: 8px; padding: 8px 14px; font-size: 14px; background: #fff; color: #111; width: 240px; outline: none; font-family: inherit; }
     .gol-bar input:focus { border-color: #388e3c; }
-    .gol-badge {
-      font-size: 12px; color: #2e7d32; background: #c8e6c9;
-      border-radius: 20px; padding: 4px 12px; white-space: nowrap;
-    }
+    .gol-badge { font-size: 12px; color: #2e7d32; background: #c8e6c9; border-radius: 20px; padding: 4px 12px; white-space: nowrap; }
 
-    .table-wrap {
-      overflow-x: auto;
-      border: 0.5px solid #ddd; border-top: none;
-      background: #fff;
-    }
+    .table-wrap { overflow-x: auto; border: 0.5px solid #ddd; border-top: none; background: #fff; }
 
     table { width: 100%; border-collapse: collapse; font-size: 14px; }
-
-    thead th {
-      background: #1a237e; color: rgba(255,255,255,0.9);
-      padding: 12px 16px; text-align: center;
-      font-weight: 500; font-size: 12px;
-      border-right: 0.5px solid rgba(255,255,255,0.12);
-      white-space: nowrap; line-height: 1.4;
-    }
+    thead th { background: #1a237e; color: rgba(255,255,255,0.9); padding: 12px 16px; text-align: center; font-weight: 500; font-size: 12px; border-right: 0.5px solid rgba(255,255,255,0.12); white-space: nowrap; line-height: 1.4; }
     thead th:first-child { text-align: left; min-width: 200px; }
-    thead th.th-total { background: #0d47a1; }
     thead th.th-gol   { background: #1b5e20; }
-    thead th.th-sub   { background: #37474f; }
-    thead th.th-camp  { background: #e65100; }
+    thead th.th-total { background: #0d47a1; }
 
     tbody tr { border-bottom: 0.5px solid #eee; transition: background 0.1s; }
     tbody tr:hover { background: #f9f9f9; }
     tbody tr:last-child { border-bottom: none; }
-
-    tbody td {
-      padding: 13px 16px; text-align: center;
-      font-size: 14px; color: #555;
-      border-right: 0.5px solid #eee;
-    }
+    tbody td { padding: 13px 16px; text-align: center; font-size: 14px; color: #555; border-right: 0.5px solid #eee; }
     tbody td:first-child { text-align: left; }
     tbody td:last-child { border-right: none; }
 
     .name-cell { display: flex; align-items: center; gap: 10px; }
     .rank-num { font-size: 13px; color: #aaa; min-width: 24px; text-align: right; }
-    .avatar {
-      width: 32px; height: 32px; border-radius: 50%;
-      background: #e8eaf6; display: flex; align-items: center;
-      justify-content: center; font-size: 11px; font-weight: 500;
-      color: #3949ab; flex-shrink: 0;
-    }
+    .avatar { width: 32px; height: 32px; border-radius: 50%; background: #e8eaf6; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: #3949ab; flex-shrink: 0; }
     .pts-leader { color: #b8860b; font-weight: 500; font-size: 16px; }
     .pts-top    { color: #222;    font-weight: 500; font-size: 16px; }
     .pts-rest   { color: #555;    font-weight: 500; font-size: 16px; }
     .td-leader  { background: #fffde7; }
     .gol-hit    { color: #2e7d32; font-weight: 500; background: #f1f8e9; }
     .gol-miss   { color: #555; }
-    .pending    { color: #ccc; font-size: 18px; }
 
-    .footer {
-      background: #f8f9fa;
-      border-radius: 0 0 12px 12px;
-      padding: 12px 28px; display: flex; align-items: center; justify-content: space-between;
-      border: 0.5px solid #ddd; border-top: none; flex-wrap: wrap; gap: 8px;
-    }
+    .footer { background: #f8f9fa; border-radius: 0 0 12px 12px; padding: 12px 28px; display: flex; align-items: center; justify-content: space-between; border: 0.5px solid #ddd; border-top: none; flex-wrap: wrap; gap: 8px; }
     .footer span { font-size: 13px; color: #666; }
-    .footer-badge {
-      background: #e8eaf6; color: #3949ab;
-      border-radius: 20px; padding: 4px 12px; font-size: 12px;
-    }
+    .footer-badge { background: #e8eaf6; color: #3949ab; border-radius: 20px; padding: 4px 12px; font-size: 12px; }
 
     @media (max-width: 600px) {
       body { padding: 12px 8px; }
@@ -157,16 +89,9 @@
       <thead>
         <tr>
           <th style="text-align:left;">#&nbsp;&nbsp; Participante</th>
-          <th class="th-total">Total Parcial<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 178</span></th>
           <th class="th-gol">Goleador<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 10</span></th>
           <th>1°/2° Grupo<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 60</span></th>
-          <th>3°s Avanzan<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 8</span></th>
-          <th>Octavos<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 16</span></th>
-          <th>Cuartos<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 32</span></th>
-          <th>Semis<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 16</span></th>
-          <th>Finalistas<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 12</span></th>
-          <th class="th-sub">Subcampeón<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 8</span></th>
-          <th class="th-camp">Campeón<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 16</span></th>
+          <th class="th-total">Total Parcial<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 178</span></th>
         </tr>
       </thead>
       <tbody id="tbody"></tbody>
@@ -175,7 +100,7 @@
 
   <div class="footer">
     <span>29 participantes · Máximo posible: <strong>178 pts</strong></span>
-    <span class="footer-badge">Grupos A–E completados</span>
+    <span class="footer-badge">Fase de Grupos en curso</span>
   </div>
 </div>
 
@@ -212,11 +137,10 @@ const rawData = [
   { name: "Saúl Eduardo Donis Granados",    grupos: 19, goleadorPick: "Erling Haaland" },
 ];
 
-const dias   = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
-const meses  = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
-const hoy    = new Date();
-document.getElementById('fechaHoy').textContent =
-  dias[hoy.getDay()] + ', ' + hoy.getDate() + ' de ' + meses[hoy.getMonth()];
+const dias  = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
+const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+const hoy   = new Date();
+document.getElementById('fechaHoy').textContent = dias[hoy.getDay()] + ', ' + hoy.getDate() + ' de ' + meses[hoy.getMonth()];
 
 function norm(s) {
   return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9 ]/g,"").trim();
@@ -241,11 +165,9 @@ function renderTable(goleadorActual) {
     const nameW = rank === 1 ? 'color:#b8860b;font-weight:500;' : rank <= 3 ? 'font-weight:500;' : '';
     const ptsC  = rank === 1 ? 'pts-leader' : rank <= 3 ? 'pts-top' : 'pts-rest';
     const tdL   = rank === 1 ? ' td-leader' : '';
-
     const golCell = p.acierta
       ? `<td class="gol-hit">${p.goleadorPick} ✓</td>`
       : `<td class="gol-miss">${p.goleadorPick}</td>`;
-
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td>
@@ -255,16 +177,9 @@ function renderTable(goleadorActual) {
           <span style="font-size:14px;${nameW}">${medal}${p.name}</span>
         </div>
       </td>
-      <td class="${tdL}"><span class="${ptsC}">${p.total} pts</span></td>
       ${golCell}
       <td>${p.grupos}</td>
-      <td class="pending">—</td>
-      <td class="pending">—</td>
-      <td class="pending">—</td>
-      <td class="pending">—</td>
-      <td class="pending">—</td>
-      <td class="pending">—</td>
-      <td class="pending">—</td>
+      <td class="${tdL}"><span class="${ptsC}">${p.total} pts</span></td>
     `;
     tbody.appendChild(tr);
   });
