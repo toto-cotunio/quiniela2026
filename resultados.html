@@ -7,7 +7,7 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f4f6f9; padding: 24px 16px; min-height: 100vh; }
-    .container { max-width: 1000px; margin: 0 auto; }
+    .container { max-width: 1100px; margin: 0 auto; }
     .header { background: #1a237e; border-radius: 12px 12px 0 0; padding: 20px 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
     .header-left { display: flex; align-items: center; gap: 14px; }
     .header-icon { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-size: 22px; }
@@ -56,7 +56,7 @@
       <div>
         <h1>Quiniela "sin VAR" — Mundial 2026</h1>
         <div class="header-sub">
-          <p>Resultados parciales · Fase de grupos + 3°s completados</p>
+          <p>Resultados parciales · Octavos de Final en curso</p>
           <span class="header-date" id="fechaHoy"></span>
         </div>
       </div>
@@ -76,6 +76,7 @@
           <th class="th-gol">Goleador<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 10</span></th>
           <th>1°/2° Grupo<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 60</span></th>
           <th>3°s Avanzan<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 8</span></th>
+          <th>Octavos<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 16</span></th>
           <th class="th-total">Total Parcial<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 178</span></th>
         </tr>
       </thead>
@@ -84,40 +85,40 @@
   </div>
   <div class="footer">
     <span>29 participantes · Máximo posible: <strong>178 pts</strong></span>
-    <span class="footer-badge">Grupos A–L + 3°s completados</span>
+    <span class="footer-badge">Grupos + 3°s + 4/16 Octavos completados</span>
   </div>
 </div>
 <script>
 const rawData = [
-  { name: "Chalo Solares (hijo)",            grupos: 36, terceros: 2, goleadorPick: "Cristiano Ronaldo" },
-  { name: "Gerardo Antonio Brenes Trejos",   grupos: 45, terceros: 3, goleadorPick: "Kylian Mbappé" },
-  { name: "Freddy Aldana",                   grupos: 34, terceros: 4, goleadorPick: "Kylian Mbappé" },
-  { name: "Carlos Cuesta",                   grupos: 36, terceros: 2, goleadorPick: "Kylian Mbappé" },
-  { name: "Oscar Humberto Aldana Hernandez", grupos: 43, terceros: 4, goleadorPick: "Kylian Mbappé" },
-  { name: "Oscar Javier Aldana Rodas",       grupos: 42, terceros: 3, goleadorPick: "Kylian Mbappé" },
-  { name: "Álvaro Navarro",                  grupos: 45, terceros: 4, goleadorPick: "Lamine Yamal" },
-  { name: "Jesús Rolando Sánchez Cabrera",   grupos: 41, terceros: 5, goleadorPick: "Julián Álvarez" },
-  { name: "Luis Hernández Bocaletti",        grupos: 40, terceros: 2, goleadorPick: "Kylian Mbappé" },
-  { name: "Nicolás Yee Melgar",             grupos: 44, terceros: 2, goleadorPick: "Kylian Mbappé" },
-  { name: "Adrian Solares",                  grupos: 42, terceros: 1, goleadorPick: "Ferran Torres" },
-  { name: "Yuri Solares",                    grupos: 46, terceros: 2, goleadorPick: "Leonel Messi" },
-  { name: "Elvira Alejandra Cerna Lopez",    grupos: 43, terceros: 3, goleadorPick: "Kylian Mbappé" },
-  { name: "Chalo Solares (Papá)",            grupos: 39, terceros: 3, goleadorPick: "Harry Kane" },
-  { name: "Sebastian Navarro",               grupos: 47, terceros: 3, goleadorPick: "Kylian Mbappé" },
-  { name: "Neluca Solares",                  grupos: 42, terceros: 3, goleadorPick: "Harry Kane" },
-  { name: "Jose Antonio Celis Infante",      grupos: 45, terceros: 2, goleadorPick: "Kylian Mbappé" },
-  { name: "Roberto Quezada De la Peña",      grupos: 45, terceros: 4, goleadorPick: "Kylian Mbappé" },
-  { name: "Reynaldo José Dinarte Díaz",      grupos: 47, terceros: 3, goleadorPick: "Kylian Mbappé" },
-  { name: "Carlos Paz Urrutia",             grupos: 37, terceros: 2, goleadorPick: "Harry Kane" },
-  { name: "Osly Rolando Domínguez Paz",     grupos: 44, terceros: 5, goleadorPick: "Kylian Mbappé" },
-  { name: "Renato Marcelo Roverso",          grupos: 38, terceros: 3, goleadorPick: "Kylian Mbappé" },
-  { name: "Gustavo Adolfo Ovalle Castilla", grupos: 39, terceros: 5, goleadorPick: "Harry Kane" },
-  { name: "Gustavo Adolfo Ovalle Armas",    grupos: 37, terceros: 5, goleadorPick: "Kylian Mbappé" },
-  { name: "Antonio García Salas Jacobs",    grupos: 47, terceros: 2, goleadorPick: "Kylian Mbappé" },
-  { name: "Sebastian Solares Morales",      grupos: 34, terceros: 5, goleadorPick: "Kylian Mbappé" },
-  { name: "Mario Gutiérrez",                grupos: 22, terceros: 0, goleadorPick: "M. Olise" },
-  { name: "Eric Pocasangre",                grupos: 29, terceros: 3, goleadorPick: "Kylian Mbappe" },
-  { name: "Saúl Eduardo Donis Granados",    grupos: 37, terceros: 5, goleadorPick: "Erling Haaland" },
+  { name: "Chalo Solares (hijo)",            grupos: 36, terceros: 2, octavos: 1, goleadorPick: "Cristiano Ronaldo" },
+  { name: "Gerardo Antonio Brenes Trejos",   grupos: 45, terceros: 3, octavos: 2, goleadorPick: "Kylian Mbappé" },
+  { name: "Freddy Aldana",                   grupos: 34, terceros: 4, octavos: 1, goleadorPick: "Kylian Mbappé" },
+  { name: "Carlos Cuesta",                   grupos: 36, terceros: 2, octavos: 2, goleadorPick: "Kylian Mbappé" },
+  { name: "Oscar Humberto Aldana Hernandez", grupos: 43, terceros: 4, octavos: 1, goleadorPick: "Kylian Mbappé" },
+  { name: "Oscar Javier Aldana Rodas",       grupos: 42, terceros: 3, octavos: 1, goleadorPick: "Kylian Mbappé" },
+  { name: "Álvaro Navarro",                  grupos: 45, terceros: 4, octavos: 2, goleadorPick: "Lamine Yamal" },
+  { name: "Jesús Rolando Sánchez Cabrera",   grupos: 41, terceros: 5, octavos: 1, goleadorPick: "Julián Álvarez" },
+  { name: "Luis Hernández Bocaletti",        grupos: 40, terceros: 2, octavos: 2, goleadorPick: "Kylian Mbappé" },
+  { name: "Nicolás Yee Melgar",             grupos: 44, terceros: 2, octavos: 2, goleadorPick: "Kylian Mbappé" },
+  { name: "Adrian Solares",                  grupos: 42, terceros: 1, octavos: 1, goleadorPick: "Ferran Torres" },
+  { name: "Yuri Solares",                    grupos: 46, terceros: 2, octavos: 3, goleadorPick: "Leonel Messi" },
+  { name: "Elvira Alejandra Cerna Lopez",    grupos: 43, terceros: 3, octavos: 2, goleadorPick: "Kylian Mbappé" },
+  { name: "Chalo Solares (Papá)",            grupos: 39, terceros: 3, octavos: 2, goleadorPick: "Harry Kane" },
+  { name: "Sebastian Navarro",               grupos: 47, terceros: 3, octavos: 2, goleadorPick: "Kylian Mbappé" },
+  { name: "Neluca Solares",                  grupos: 42, terceros: 3, octavos: 3, goleadorPick: "Harry Kane" },
+  { name: "Jose Antonio Celis Infante",      grupos: 45, terceros: 2, octavos: 1, goleadorPick: "Kylian Mbappé" },
+  { name: "Roberto Quezada De la Peña",      grupos: 45, terceros: 4, octavos: 2, goleadorPick: "Kylian Mbappé" },
+  { name: "Reynaldo José Dinarte Díaz",      grupos: 47, terceros: 3, octavos: 2, goleadorPick: "Kylian Mbappé" },
+  { name: "Carlos Paz Urrutia",             grupos: 37, terceros: 2, octavos: 2, goleadorPick: "Harry Kane" },
+  { name: "Osly Rolando Domínguez Paz",     grupos: 44, terceros: 5, octavos: 2, goleadorPick: "Kylian Mbappé" },
+  { name: "Renato Marcelo Roverso",          grupos: 38, terceros: 3, octavos: 3, goleadorPick: "Kylian Mbappé" },
+  { name: "Gustavo Adolfo Ovalle Castilla", grupos: 39, terceros: 5, octavos: 2, goleadorPick: "Harry Kane" },
+  { name: "Gustavo Adolfo Ovalle Armas",    grupos: 37, terceros: 5, octavos: 1, goleadorPick: "Kylian Mbappé" },
+  { name: "Antonio García Salas Jacobs",    grupos: 47, terceros: 2, octavos: 2, goleadorPick: "Kylian Mbappé" },
+  { name: "Sebastian Solares Morales",      grupos: 34, terceros: 5, octavos: 2, goleadorPick: "Kylian Mbappé" },
+  { name: "Mario Gutiérrez",                grupos: 22, terceros: 0, octavos: 1, goleadorPick: "M. Olise" },
+  { name: "Eric Pocasangre",                grupos: 29, terceros: 3, octavos: 2, goleadorPick: "Kylian Mbappe" },
+  { name: "Saúl Eduardo Donis Granados",    grupos: 37, terceros: 5, octavos: 2, goleadorPick: "Erling Haaland" },
 ];
 
 const dias  = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
@@ -137,7 +138,7 @@ function renderTable(goleadorActual) {
   const computed = rawData.map(p => {
     const acierta = normActual && norm(p.goleadorPick) === normActual;
     const golPts = acierta ? 10 : 0;
-    return { ...p, acierta, golPts, total: p.grupos + p.terceros + golPts };
+    return { ...p, acierta, golPts, total: p.grupos + p.terceros + p.octavos + golPts };
   });
   computed.sort((a,b) => b.total - a.total);
   const maxPts = computed[0].total;
@@ -163,6 +164,7 @@ function renderTable(goleadorActual) {
       ${golCell}
       <td>${p.grupos}</td>
       <td>${p.terceros}</td>
+      <td>${p.octavos}</td>
       <td class="${tdL}"><span class="${ptsC}">${p.total} pts</span></td>
     `;
     tbody.appendChild(tr);
