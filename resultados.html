@@ -1,182 +1,150 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Resultados — Quiniela sin VAR del Mundial 2026</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f4f6f9; padding: 24px 16px; min-height: 100vh; }
-    .container { max-width: 1100px; margin: 0 auto; }
-    .header { background: #1a237e; border-radius: 12px 12px 0 0; padding: 20px 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-    .header-left { display: flex; align-items: center; gap: 14px; }
-    .header-icon { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-size: 22px; }
-    .header h1 { font-size: 20px; font-weight: 500; color: #fff; }
-    .header-sub { display: flex; align-items: center; gap: 10px; margin-top: 4px; flex-wrap: wrap; }
-    .header p { font-size: 13px; color: rgba(255,255,255,0.65); }
-    .header-date { font-size: 12px; color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.12); border: 0.5px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 2px 10px; }
-    .badge-live { background: rgba(255,255,255,0.15); color: #fff; border: 0.5px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 5px 12px; font-size: 12px; white-space: nowrap; }
-    .gol-bar { background: #f0f7e8; border-bottom: 0.5px solid #a5d6a7; padding: 12px 28px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-    .gol-bar label { font-size: 14px; color: #2e7d32; font-weight: 500; white-space: nowrap; }
-    .gol-bar input { border: 1px solid #a5d6a7; border-radius: 8px; padding: 8px 14px; font-size: 14px; background: #fff; color: #111; width: 240px; outline: none; font-family: inherit; }
-    .gol-bar input:focus { border-color: #388e3c; }
-    .gol-badge { font-size: 12px; color: #2e7d32; background: #c8e6c9; border-radius: 20px; padding: 4px 12px; white-space: nowrap; }
-    .table-wrap { overflow-x: auto; border: 0.5px solid #ddd; border-top: none; background: #fff; }
-    table { width: 100%; border-collapse: collapse; font-size: 14px; }
-    thead th { background: #1a237e; color: rgba(255,255,255,0.9); padding: 12px 16px; text-align: center; font-weight: 500; font-size: 12px; border-right: 0.5px solid rgba(255,255,255,0.12); white-space: nowrap; line-height: 1.4; }
-    thead th:first-child { text-align: left; min-width: 200px; }
-    thead th.th-gol { background: #1b5e20; }
-    thead th.th-total { background: #0d47a1; }
-    tbody tr { border-bottom: 0.5px solid #eee; transition: background 0.1s; }
-    tbody tr:hover { background: #f9f9f9; }
-    tbody tr:last-child { border-bottom: none; }
-    tbody td { padding: 13px 16px; text-align: center; font-size: 14px; color: #555; border-right: 0.5px solid #eee; }
-    tbody td:first-child { text-align: left; }
-    tbody td:last-child { border-right: none; }
-    .name-cell { display: flex; align-items: center; gap: 10px; }
-    .rank-num { font-size: 13px; color: #aaa; min-width: 24px; text-align: right; }
-    .avatar { width: 32px; height: 32px; border-radius: 50%; background: #e8eaf6; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: #3949ab; flex-shrink: 0; }
-    .pts-leader { color: #b8860b; font-weight: 500; font-size: 16px; }
-    .pts-top    { color: #222; font-weight: 500; font-size: 16px; }
-    .pts-rest   { color: #555; font-weight: 500; font-size: 16px; }
-    .td-leader  { background: #fffde7; }
-    .gol-hit    { color: #2e7d32; font-weight: 500; background: #f1f8e9; }
-    .gol-miss   { color: #555; }
-    .footer { background: #f8f9fa; border-radius: 0 0 12px 12px; padding: 12px 28px; display: flex; align-items: center; justify-content: space-between; border: 0.5px solid #ddd; border-top: none; flex-wrap: wrap; gap: 8px; }
-    .footer span { font-size: 13px; color: #666; }
-    .footer-badge { background: #e8eaf6; color: #3949ab; border-radius: 20px; padding: 4px 12px; font-size: 12px; }
-    @media (max-width: 600px) { body { padding: 12px 8px; } .header { padding: 16px; } .header h1 { font-size: 16px; } .gol-bar { padding: 10px 16px; } .gol-bar input { width: 100%; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiniela «sin VAR» — Mundial 2026 · Resultados</title>
+<style>
+  :root{
+    --navy:#1a237e; --navy2:#283593; --gold:#f9a825; --gold-bg:#fff9e6;
+    --green:#2e7d32; --green-bg:#eef7e9; --green-line:#a5d6a7;
+    --ink:#1a1f36; --muted:#6b7280; --line:#e6e8ef; --bg:#f4f5fa;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:920px;margin:0 auto;padding:16px;}
+  .card{background:#fff;border-radius:18px;overflow:hidden;
+    box-shadow:0 10px 30px rgba(26,35,126,.10);}
+  header.h{background:linear-gradient(135deg,var(--navy),var(--navy2));
+    color:#fff;padding:24px 24px 20px;}
+  header.h .top{display:flex;align-items:center;gap:14px;}
+  header.h .ball{font-size:34px;line-height:1;}
+  header.h h1{margin:0;font-size:26px;font-weight:800;letter-spacing:.3px;}
+  header.h .sub{margin-top:6px;font-size:15px;color:#c5cae9;font-weight:600;}
+  header.h .date{margin-top:2px;font-size:13.5px;color:#9fa8da;font-weight:600;}
+  .golbar{background:var(--green-bg);border-top:1px solid var(--green-line);
+    border-bottom:1px solid var(--green-line);padding:12px 24px;
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .golbar .lbl{color:var(--green);font-weight:800;font-size:14px;}
+  .golbar .chip{background:#c8e6c9;color:#1b5e20;font-weight:700;
+    border-radius:999px;padding:4px 12px;font-size:13px;}
+  .golbar .pts{color:var(--green);font-weight:800;font-size:13px;}
+  .scroll{overflow-x:auto;}
+  table{width:100%;border-collapse:collapse;min-width:660px;}
+  thead th{background:var(--navy);color:#fff;font-weight:700;font-size:12.5px;
+    padding:12px 10px;text-align:center;white-space:nowrap;border-right:1px solid rgba(255,255,255,.12);}
+  thead th .mx{display:block;font-weight:500;opacity:.72;font-size:10.5px;margin-top:2px;}
+  thead th.name{text-align:left;padding-left:20px;min-width:200px;position:sticky;left:0;background:var(--navy);z-index:2;}
+  thead th.tot{background:#0d1442;}
+  tbody td{padding:11px 10px;text-align:center;font-size:14.5px;color:#374151;
+    border-bottom:1px solid var(--line);border-right:1px solid var(--line);}
+  tbody td.name{text-align:left;padding-left:20px;font-weight:700;color:var(--ink);
+    position:sticky;left:0;background:#fff;z-index:1;}
+  tbody td.pos{width:44px;color:var(--muted);font-weight:800;}
+  tbody td.tot{font-weight:800;font-size:16px;color:var(--navy);background:#f7f8fd;}
+  tbody tr:hover td{background:#f0f2fb;}
+  tbody tr:hover td.name{background:#f0f2fb;}
+  tbody tr.leader td{background:var(--gold-bg);}
+  tbody tr.leader td.name{background:var(--gold-bg);}
+  tbody tr.leader td.tot{background:#fff2c7;color:#8a6d00;}
+  .gol-hit{color:var(--green);font-weight:800;}
+  .gol-hit .tick{background:#c8e6c9;border-radius:6px;padding:1px 6px;margin-left:2px;font-size:11px;}
+  .gol-miss{color:var(--muted);font-weight:500;}
+  footer.f{display:flex;justify-content:space-between;align-items:center;gap:12px;
+    flex-wrap:wrap;padding:16px 24px;background:#fafbff;border-top:1px solid var(--line);
+    font-size:13px;color:var(--muted);}
+  footer.f .phase{background:#e8eaf6;color:var(--navy);font-weight:800;
+    border-radius:999px;padding:5px 14px;font-size:12.5px;}
+  footer.f b{color:var(--ink);}
+  @media(max-width:560px){
+    header.h h1{font-size:21px;} .wrap{padding:8px;}
+    header.h{padding:18px 16px;} .golbar{padding:10px 16px;}
+  }
+</style>
 </head>
 <body>
-<div class="container">
-  <div class="header">
-    <div class="header-left">
-      <div class="header-icon">⚽</div>
-      <div>
-        <h1>Quiniela "sin VAR" — Mundial 2026</h1>
-        <div class="header-sub">
-          <p>Resultados parciales · Octavos de Final en curso</p>
-          <span class="header-date" id="fechaHoy"></span>
+<div class="wrap">
+  <div class="card">
+    <header class="h">
+      <div class="top">
+        <span class="ball">⚽</span>
+        <div>
+          <h1>Quiniela «sin VAR» — Mundial 2026</h1>
+          <div class="sub">Resultados parciales · Octavos de final en curso</div>
+          <div class="date" id="fecha"></div>
         </div>
       </div>
+    </header>
+
+    <div class="golbar">
+      <span class="lbl">⚽ Goleadores actuales:</span>
+      <span class="chip">Leonel Messi</span>
+      <span class="chip">Kylian Mbappé</span>
+      <span class="pts">+10 pts para quien acertó cualquiera</span>
     </div>
-    <span class="badge-live">🔴 En vivo</span>
-  </div>
-  <div class="gol-bar">
-    <label>⚽ Goleador actual:</label>
-    <input type="text" id="goleadorInput" placeholder="Nombre del jugador..." value="Leonel Messi" />
-    <span class="gol-badge">+10 pts al total</span>
-  </div>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th style="text-align:left;">#&nbsp;&nbsp; Participante</th>
-          <th class="th-gol">Goleador<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 10</span></th>
-          <th>1°/2° Grupo<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 60</span></th>
-          <th>3°s Avanzan<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 8</span></th>
-          <th>Octavos<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 16</span></th>
-          <th class="th-total">Total Parcial<br><span style="font-weight:400;opacity:.65;font-size:11px;">máx 178</span></th>
-        </tr>
-      </thead>
-      <tbody id="tbody"></tbody>
-    </table>
-  </div>
-  <div class="footer">
-    <span>29 participantes · Máximo posible: <strong>178 pts</strong></span>
-    <span class="footer-badge">Grupos + 3°s + 4/16 Octavos completados</span>
+
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th class="name">Participante</th>
+            <th>Goleador</th>
+            <th>1° / 2° Grupo<span class="mx">máx 60</span></th>
+            <th>3°s Avanzan<span class="mx">máx 8</span></th>
+            <th>Octavos<span class="mx">máx 16</span></th>
+            <th class="tot">Total Parcial<span class="mx">máx 178</span></th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+<tr class="leader"><td class="name"><span class="pos">🥇</span>&nbsp;Sebastian Navarro</td><td><span class="gol-hit">Kylian Mbappé <span class="tick">✓ +10</span></span></td><td>47</td><td>3</td><td>4</td><td class="tot">64</td></tr>
+<tr><td class="name"><span class="pos">2°</span>&nbsp;Antonio García Salas Jacobs</td><td><span class="gol-hit">Kylian Mbappé <span class="tick">✓ +10</span></span></td><td>47</td><td>2</td><td>4</td><td class="tot">63</td></tr>
+<tr><td class="name"><span class="pos">3°</span>&nbsp;Osly Rolando Domínguez Paz</td><td><span class="gol-hit">Kylian Mbappé <span class="tick">✓ +10</span></span></td><td>44</td><td>5</td><td>4</td><td class="tot">63</td></tr>
+<tr><td class="name"><span class="pos">4°</span>&nbsp;Reynaldo José Dinarte Díaz</td><td><span class="gol-hit">Kylian Mbappé <span class="tick">✓ +10</span></span></td><td>47</td><td>3</td><td>3</td><td class="tot">63</td></tr>
+<tr><td class="name"><span class="pos">5°</span>&nbsp;Roberto Quezada De la Peña</td><td><span class="gol-hit">Kylian Mbappé <span class="tick">✓ +10</span></span></td><td>45</td><td>4</td><td>4</td><td class="tot">63</td></tr>
+<tr><td class="name"><span class="pos">6°</span>&nbsp;Gerardo Antonio Brenes Trejos</td><td><span class="gol-hit">Kylian Mbappé <span class="tick">✓ +10</span></span></td><td>45</td><td>3</td><td>4</td><td class="tot">62</td></tr>
+<tr><td class="name"><span class="pos">7°</span>&nbsp;Elvira Alejandra Cerna Lopez</td><td><span class="gol-hit">Kylian Mbappé <span class="tick">✓ +10</span></span></td><td>43</td><td>3</td><td>4</td><td class="tot">60</td></tr>
+<tr><td class="name"><span class="pos">8°</span>&nbsp;Jose Antonio Celis Infante</td><td><span class="gol-hit">Kylian Mbappé <span class="tick">✓ +10</span></span></td><td>45</td><td>2</td><td>3</td><td class="tot">60</td></tr>
+<tr><td class="name"><span class="pos">9°</span>&nbsp;Nicolás Yee Melgar</td><td><span class="gol-hit">Kylian Mbappé <span class="tick">✓ +10</span></span></td><td>44</td><td>2</td><td>4</td><td class="tot">60</td></tr>
+<tr><td class="name"><span class="pos">10°</span>&nbsp;Oscar Humberto Aldana Hernandez</td><td><span class="gol-hit">Kylian Mbappé <span class="tick">✓ +10</span></span></td><td>43</td><td>4</td><td>3</td><td class="tot">60</td></tr>
+<tr><td class="name"><span class="pos">11°</span>&nbsp;Oscar Javier Aldana Rodas</td><td><span class="gol-hit">Kylian Mbappé <span class="tick">✓ +10</span></span></td><td>42</td><td>3</td><td>4</td><td class="tot">59</td></tr>
+<tr><td class="name"><span class="pos">12°</span>&nbsp;Luis Hernández Bocaletti</td><td><span class="gol-hit">Kylian Mbappé <span class="tick">✓ +10</span></span></td><td>40</td><td>2</td><td>5</td><td class="tot">57</td></tr>
+<tr><td class="name"><span class="pos">13°</span>&nbsp;Renato Marcelo Roverso</td><td><span class="gol-hit">Kylian Mbappé <span class="tick">✓ +10</span></span></td><td>38</td><td>3</td><td>6</td><td class="tot">57</td></tr>
+<tr><td class="name"><span class="pos">14°</span>&nbsp;Gustavo Adolfo Ovalle Armas</td><td><span class="gol-hit">Kylian Mbappé <span class="tick">✓ +10</span></span></td><td>37</td><td>5</td><td>3</td><td class="tot">55</td></tr>
+<tr><td class="name"><span class="pos">15°</span>&nbsp;Sebastian Solares Morales</td><td><span class="gol-hit">Kylian Mbappé <span class="tick">✓ +10</span></span></td><td>34</td><td>5</td><td>4</td><td class="tot">53</td></tr>
+<tr><td class="name"><span class="pos">16°</span>&nbsp;Yuri Solares</td><td><span class="gol-hit">Leonel Messi <span class="tick">✓ +10</span></span></td><td>36</td><td>2</td><td>5</td><td class="tot">53</td></tr>
+<tr><td class="name"><span class="pos">17°</span>&nbsp;Álvaro Navarro</td><td><span class="gol-miss">Lamine Yamal</span></td><td>45</td><td>4</td><td>4</td><td class="tot">53</td></tr>
+<tr><td class="name"><span class="pos">18°</span>&nbsp;Carlos Cuesta</td><td><span class="gol-hit">Kylian Mbappé <span class="tick">✓ +10</span></span></td><td>36</td><td>2</td><td>4</td><td class="tot">52</td></tr>
+<tr><td class="name"><span class="pos">19°</span>&nbsp;Neluca Solares</td><td><span class="gol-miss">Harry Kane</span></td><td>42</td><td>3</td><td>6</td><td class="tot">51</td></tr>
+<tr><td class="name"><span class="pos">20°</span>&nbsp;Freddy Aldana</td><td><span class="gol-hit">Kylian Mbappé <span class="tick">✓ +10</span></span></td><td>34</td><td>4</td><td>2</td><td class="tot">50</td></tr>
+<tr><td class="name"><span class="pos">21°</span>&nbsp;Jesús Rolando Sánchez Cabrera</td><td><span class="gol-miss">Julián Álvarez</span></td><td>41</td><td>5</td><td>3</td><td class="tot">49</td></tr>
+<tr><td class="name"><span class="pos">22°</span>&nbsp;Gustavo Adolfo Ovalle Castilla</td><td><span class="gol-miss">Harry Kane</span></td><td>39</td><td>5</td><td>4</td><td class="tot">48</td></tr>
+<tr><td class="name"><span class="pos">23°</span>&nbsp;Adrian Solares</td><td><span class="gol-miss">Ferran Torres</span></td><td>42</td><td>1</td><td>4</td><td class="tot">47</td></tr>
+<tr><td class="name"><span class="pos">24°</span>&nbsp;Chalo Solares (Papá)</td><td><span class="gol-miss">Harry Kane</span></td><td>39</td><td>3</td><td>4</td><td class="tot">46</td></tr>
+<tr><td class="name"><span class="pos">25°</span>&nbsp;Saúl Eduardo Donis Granados</td><td><span class="gol-miss">Erling Haaland</span></td><td>37</td><td>5</td><td>4</td><td class="tot">46</td></tr>
+<tr><td class="name"><span class="pos">26°</span>&nbsp;Eric Pocasangre</td><td><span class="gol-hit">Kylian Mbappe <span class="tick">✓ +10</span></span></td><td>29</td><td>3</td><td>3</td><td class="tot">45</td></tr>
+<tr><td class="name"><span class="pos">27°</span>&nbsp;Carlos Paz Urrutia</td><td><span class="gol-miss">Harry Kane</span></td><td>37</td><td>2</td><td>5</td><td class="tot">44</td></tr>
+<tr><td class="name"><span class="pos">28°</span>&nbsp;Chalo Solares (hijo)</td><td><span class="gol-miss">Cristiano Ronaldo</span></td><td>36</td><td>2</td><td>3</td><td class="tot">41</td></tr>
+<tr><td class="name"><span class="pos">29°</span>&nbsp;Mario Gutiérrez</td><td><span class="gol-miss">M. Olise</span></td><td>22</td><td>0</td><td>4</td><td class="tot">26</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer class="f">
+      <span>29 participantes · Máximo posible: <b>178 pts</b></span>
+      <span class="phase">Octavos de Final</span>
+    </footer>
   </div>
 </div>
+
 <script>
-const rawData = [
-  { name: "Chalo Solares (hijo)",            grupos: 36, terceros: 2, octavos: 1, goleadorPick: "Cristiano Ronaldo" },
-  { name: "Gerardo Antonio Brenes Trejos",   grupos: 45, terceros: 3, octavos: 2, goleadorPick: "Kylian Mbappé" },
-  { name: "Freddy Aldana",                   grupos: 34, terceros: 4, octavos: 1, goleadorPick: "Kylian Mbappé" },
-  { name: "Carlos Cuesta",                   grupos: 36, terceros: 2, octavos: 2, goleadorPick: "Kylian Mbappé" },
-  { name: "Oscar Humberto Aldana Hernandez", grupos: 43, terceros: 4, octavos: 1, goleadorPick: "Kylian Mbappé" },
-  { name: "Oscar Javier Aldana Rodas",       grupos: 42, terceros: 3, octavos: 1, goleadorPick: "Kylian Mbappé" },
-  { name: "Álvaro Navarro",                  grupos: 45, terceros: 4, octavos: 2, goleadorPick: "Lamine Yamal" },
-  { name: "Jesús Rolando Sánchez Cabrera",   grupos: 41, terceros: 5, octavos: 1, goleadorPick: "Julián Álvarez" },
-  { name: "Luis Hernández Bocaletti",        grupos: 40, terceros: 2, octavos: 2, goleadorPick: "Kylian Mbappé" },
-  { name: "Nicolás Yee Melgar",             grupos: 44, terceros: 2, octavos: 2, goleadorPick: "Kylian Mbappé" },
-  { name: "Adrian Solares",                  grupos: 42, terceros: 1, octavos: 1, goleadorPick: "Ferran Torres" },
-  { name: "Yuri Solares",                    grupos: 46, terceros: 2, octavos: 3, goleadorPick: "Leonel Messi" },
-  { name: "Elvira Alejandra Cerna Lopez",    grupos: 43, terceros: 3, octavos: 2, goleadorPick: "Kylian Mbappé" },
-  { name: "Chalo Solares (Papá)",            grupos: 39, terceros: 3, octavos: 2, goleadorPick: "Harry Kane" },
-  { name: "Sebastian Navarro",               grupos: 47, terceros: 3, octavos: 2, goleadorPick: "Kylian Mbappé" },
-  { name: "Neluca Solares",                  grupos: 42, terceros: 3, octavos: 3, goleadorPick: "Harry Kane" },
-  { name: "Jose Antonio Celis Infante",      grupos: 45, terceros: 2, octavos: 1, goleadorPick: "Kylian Mbappé" },
-  { name: "Roberto Quezada De la Peña",      grupos: 45, terceros: 4, octavos: 2, goleadorPick: "Kylian Mbappé" },
-  { name: "Reynaldo José Dinarte Díaz",      grupos: 47, terceros: 3, octavos: 2, goleadorPick: "Kylian Mbappé" },
-  { name: "Carlos Paz Urrutia",             grupos: 37, terceros: 2, octavos: 2, goleadorPick: "Harry Kane" },
-  { name: "Osly Rolando Domínguez Paz",     grupos: 44, terceros: 5, octavos: 2, goleadorPick: "Kylian Mbappé" },
-  { name: "Renato Marcelo Roverso",          grupos: 38, terceros: 3, octavos: 3, goleadorPick: "Kylian Mbappé" },
-  { name: "Gustavo Adolfo Ovalle Castilla", grupos: 39, terceros: 5, octavos: 2, goleadorPick: "Harry Kane" },
-  { name: "Gustavo Adolfo Ovalle Armas",    grupos: 37, terceros: 5, octavos: 1, goleadorPick: "Kylian Mbappé" },
-  { name: "Antonio García Salas Jacobs",    grupos: 47, terceros: 2, octavos: 2, goleadorPick: "Kylian Mbappé" },
-  { name: "Sebastian Solares Morales",      grupos: 34, terceros: 5, octavos: 2, goleadorPick: "Kylian Mbappé" },
-  { name: "Mario Gutiérrez",                grupos: 22, terceros: 0, octavos: 1, goleadorPick: "M. Olise" },
-  { name: "Eric Pocasangre",                grupos: 29, terceros: 3, octavos: 2, goleadorPick: "Kylian Mbappe" },
-  { name: "Saúl Eduardo Donis Granados",    grupos: 37, terceros: 5, octavos: 2, goleadorPick: "Erling Haaland" },
-];
-
-const dias  = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
-const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
-const hoy   = new Date();
-document.getElementById('fechaHoy').textContent = dias[hoy.getDay()] + ', ' + hoy.getDate() + ' de ' + meses[hoy.getMonth()];
-
-function norm(s) {
-  return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9 ]/g,"").trim();
-}
-function initials(name) {
-  return name.split(' ').filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join('');
-}
-
-function renderTable(goleadorActual) {
-  const normActual = norm(goleadorActual);
-  const computed = rawData.map(p => {
-    const acierta = normActual && norm(p.goleadorPick) === normActual;
-    const golPts = acierta ? 10 : 0;
-    return { ...p, acierta, golPts, total: p.grupos + p.terceros + p.octavos + golPts };
-  });
-  computed.sort((a,b) => b.total - a.total);
-  const maxPts = computed[0].total;
-  const tbody = document.getElementById('tbody');
-  tbody.innerHTML = '';
-  computed.forEach((p, i) => {
-    const rank = i + 1;
-    const isLider = p.total === maxPts;
-    const medal = isLider ? '🥇 ' : '';
-    const nameW = isLider ? 'color:#b8860b;font-weight:500;' : rank <= 5 ? 'font-weight:500;' : '';
-    const ptsC  = isLider ? 'pts-leader' : rank <= 5 ? 'pts-top' : 'pts-rest';
-    const tdL   = isLider ? ' td-leader' : '';
-    const golCell = p.acierta
-      ? `<td class="gol-hit">${p.goleadorPick} ✓</td>`
-      : `<td class="gol-miss">${p.goleadorPick}</td>`;
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td><div class="name-cell">
-        <span class="rank-num">${rank}</span>
-        <div class="avatar">${initials(p.name)}</div>
-        <span style="font-size:14px;${nameW}">${medal}${p.name}</span>
-      </div></td>
-      ${golCell}
-      <td>${p.grupos}</td>
-      <td>${p.terceros}</td>
-      <td>${p.octavos}</td>
-      <td class="${tdL}"><span class="${ptsC}">${p.total} pts</span></td>
-    `;
-    tbody.appendChild(tr);
-  });
-}
-
-renderTable('Leonel Messi');
-let debounce;
-document.getElementById('goleadorInput').addEventListener('input', function() {
-  clearTimeout(debounce);
-  debounce = setTimeout(() => renderTable(this.value.trim()), 300);
-});
+// Fecha en español, capitalizada (día de publicación)
+const dias=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+const meses=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+const hoy=new Date();
+let f=`${dias[hoy.getDay()]}, ${hoy.getDate()} de ${meses[hoy.getMonth()]}`;
+document.getElementById("fecha").textContent=f.charAt(0).toUpperCase()+f.slice(1);
 </script>
 </body>
 </html>
