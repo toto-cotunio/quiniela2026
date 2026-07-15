@@ -54,7 +54,7 @@
       <div>
         <h1>Quiniela "sin VAR" — Mundial 2026</h1>
         <div class="header-sub">
-          <p>Resultados parciales · Semifinales completadas · 1 finalista definido</p>
+          <p>Resultados parciales · Semifinales completadas · España finalista</p>
           <span class="header-date" id="fechaHoy"></span>
         </div>
       </div>
@@ -94,38 +94,37 @@ const goleadoresActuales = ["leonel messi", "kylian mbappe"];
 function norm(s) { return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9 ]/g,"").trim(); }
 function initials(name) { return name.split(' ').filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join(''); }
 
-// base = total sheet (sin goleador)
-// desglose: [grupos, terceros, octavos, cuartos, semis, finalistas]
+// base = total sheet sin goleador | d = [grupos, terceros, octavos, cuartos, semis, finalistas]
 const rawData = [
-  { name:"Chalo Solares (hijo)",            base:55,  d:[36,2,3,4,0,0],  gol:"Cristiano Ronaldo" },
-  { name:"Gerardo Antonio Brenes Trejos",   base:87,  d:[45,3,4,12,12,6],gol:"Kylian Mbappé" },
-  { name:"Freddy Aldana",                   base:80,  d:[34,4,3,16,12,6],gol:"Kylian Mbappé" },
-  { name:"Carlos Cuesta",                   base:90,  d:[36,2,5,20,12,6],gol:"Kylian Mbappé" },
-  { name:"Oscar Humberto Aldana Hernandez", base:90,  d:[43,4,4,16,12,6],gol:"Kylian Mbappé" },
-  { name:"Oscar Javier Aldana Rodas",       base:103, d:[42,3,5,20,20,6],gol:"Kylian Mbappé" },
-  { name:"Álvaro Navarro",                  base:94,  d:[45,4,4,16,12,6],gol:"Lamine Yamal" },
-  { name:"Jesús Rolando Sánchez Cabrera",   base:98,  d:[41,5,4,20,16,6],gol:"Julián Álvarez" },
-  { name:"Luis Hernández Bocaletti",        base:92,  d:[40,2,6,20,12,6],gol:"Kylian Mbappé" },
-  { name:"Nicolás Yee Melgar",             base:89,  d:[44,2,5,16,16,6], gol:"Kylian Mbappé" },
-  { name:"Adrian Solares",                  base:96,  d:[42,1,5,20,16,6],gol:"Ferran Torres" },
-  { name:"Yuri Solares",                    base:80,  d:[46,2,6,12,8,6],  gol:"Leonel Messi" },
-  { name:"Elvira Alejandra Cerna Lopez",    base:89,  d:[43,3,5,16,12,6],gol:"Kylian Mbappé" },
-  { name:"Chalo Solares (Papá)",            base:84,  d:[39,3,5,16,12,4],gol:"Harry Kane" },
-  { name:"Sebastian Navarro",               base:96,  d:[47,3,5,16,16,6],gol:"Kylian Mbappé" },
-  { name:"Neluca Solares",                  base:104, d:[42,3,7,20,16,6],gol:"Harry Kane" },
-  { name:"Jose Antonio Celis Infante",      base:100, d:[45,2,4,20,16,6],gol:"Kylian Mbappé" },
-  { name:"Roberto Quezada De la Peña",      base:90,  d:[45,4,5,16,12,6],gol:"Kylian Mbappé" },
-  { name:"Reynaldo José Dinarte Díaz",      base:83,  d:[47,3,4,12,8,6], gol:"Kylian Mbappé" },
-  { name:"Carlos Paz Urrutia",             base:88,  d:[37,2,6,16,16,6],gol:"Harry Kane" },
-  { name:"Osly Rolando Domínguez Paz",     base:88,  d:[44,5,5,16,8,4], gol:"Kylian Mbappé" },
-  { name:"Renato Marcelo Roverso",          base:80,  d:[38,3,7,16,8,4], gol:"Kylian Mbappé" },
-  { name:"Gustavo Adolfo Ovalle Castilla", base:93,  d:[39,5,5,16,16,6],gol:"Harry Kane" },
-  { name:"Gustavo Adolfo Ovalle Armas",    base:86,  d:[37,5,4,16,16,6],gol:"Kylian Mbappé" },
-  { name:"Antonio García Salas Jacobs",    base:94,  d:[47,2,5,16,16,6],gol:"Kylian Mbappé" },
-  { name:"Sebastian Solares Morales",      base:66,  d:[34,5,5,12,4,6], gol:"Kylian Mbappé" },
-  { name:"Mario Gutiérrez",               base:60,  d:[22,0,5,16,8,4], gol:"M. Olise" },
-  { name:"Eric Pocasangre",               base:65,  d:[29,3,4,12,8,6], gol:"Kylian Mbappe" },
-  { name:"Saúl Eduardo Donis Granados",   base:70,  d:[37,5,5,12,4,6], gol:"Erling Haaland" },
+  { name:"Chalo Solares (hijo)",            base:55,  d:[36,2,9,8,0,0],    gol:"Cristiano Ronaldo" },
+  { name:"Gerardo Antonio Brenes Trejos",   base:87,  d:[45,3,11,16,12,0], gol:"Kylian Mbappé" },
+  { name:"Freddy Aldana",                   base:80,  d:[34,4,10,20,12,0], gol:"Kylian Mbappé" },
+  { name:"Carlos Cuesta",                   base:90,  d:[36,2,10,20,16,6], gol:"Kylian Mbappé" },
+  { name:"Oscar Humberto Aldana Hernandez", base:90,  d:[43,4,11,20,12,0], gol:"Kylian Mbappé" },
+  { name:"Oscar Javier Aldana Rodas",       base:103, d:[42,3,12,24,16,6], gol:"Kylian Mbappé" },
+  { name:"Álvaro Navarro",                  base:94,  d:[45,4,11,16,12,6], gol:"Lamine Yamal" },
+  { name:"Jesús Rolando Sánchez Cabrera",   base:98,  d:[41,5,10,20,16,6], gol:"Julián Álvarez" },
+  { name:"Luis Hernández Bocaletti",        base:92,  d:[40,2,12,20,12,6], gol:"Kylian Mbappé" },
+  { name:"Nicolás Yee Melgar",              base:89,  d:[44,2,9,16,12,6],  gol:"Kylian Mbappé" },
+  { name:"Adrian Solares",                  base:96,  d:[42,1,11,20,16,6], gol:"Ferran Torres" },
+  { name:"Yuri Solares",                    base:80,  d:[46,2,10,20,12,0], gol:"Leonel Messi" },
+  { name:"Elvira Alejandra Cerna Lopez",    base:89,  d:[43,3,11,16,16,0], gol:"Kylian Mbappé" },
+  { name:"Chalo Solares (Papá)",            base:84,  d:[39,3,12,16,8,6],  gol:"Harry Kane" },
+  { name:"Sebastian Navarro",               base:96,  d:[47,3,12,16,12,6], gol:"Kylian Mbappé" },
+  { name:"Neluca Solares",                  base:104, d:[42,3,13,24,16,6], gol:"Harry Kane" },
+  { name:"Jose Antonio Celis Infante",      base:100, d:[45,2,11,20,16,6], gol:"Kylian Mbappé" },
+  { name:"Roberto Quezada De la Peña",      base:90,  d:[45,4,11,16,8,6],  gol:"Kylian Mbappé" },
+  { name:"Reynaldo José Dinarte Díaz",      base:83,  d:[47,3,7,12,8,6],   gol:"Kylian Mbappé" },
+  { name:"Carlos Paz Urrutia",              base:88,  d:[37,2,11,20,12,6], gol:"Harry Kane" },
+  { name:"Osly Rolando Domínguez Paz",      base:88,  d:[44,5,11,16,12,0], gol:"Kylian Mbappé" },
+  { name:"Renato Marcelo Roverso",          base:80,  d:[38,3,11,16,12,0], gol:"Kylian Mbappé" },
+  { name:"Gustavo Adolfo Ovalle Castilla",  base:93,  d:[39,5,11,16,16,6], gol:"Harry Kane" },
+  { name:"Gustavo Adolfo Ovalle Armas",     base:86,  d:[37,5,10,16,12,6], gol:"Kylian Mbappé" },
+  { name:"Antonio García Salas Jacobs",     base:94,  d:[47,2,11,16,12,6], gol:"Kylian Mbappé" },
+  { name:"Sebastian Solares Morales",       base:66,  d:[34,5,11,12,4,0],  gol:"Kylian Mbappé" },
+  { name:"Mario Gutiérrez",                 base:60,  d:[22,0,10,16,12,0], gol:"M. Olise" },
+  { name:"Eric Pocasangre",                 base:65,  d:[29,3,9,20,4,0],   gol:"Kylian Mbappe" },
+  { name:"Saúl Eduardo Donis Granados",     base:70,  d:[37,5,10,8,4,6],   gol:"Erling Haaland" },
 ];
 
 const dias  = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
