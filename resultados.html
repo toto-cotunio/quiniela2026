@@ -3,47 +3,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quiniela «sin VAR» — Mundial 2026 · Resultados FINALES</title>
 <style>
-  :root{--navy:#1a237e;--navy2:#283593;--gold:#f9a825;--gold-bg:#fff9e6;
-    --green:#2e7d32;--green-bg:#eef7e9;--green-line:#a5d6a7;
-    --ink:#1a1f36;--muted:#6b7280;--line:#e6e8ef;--bg:#f4f5fa;}
+  :root{--navy:#1a237e;--navy2:#283593;--gold:#f9a825;--gold-bg:#fff9e6;--green:#2e7d32;--green-bg:#eef7e9;--green-line:#a5d6a7;--ink:#1a1f36;--muted:#6b7280;--line:#e6e8ef;--bg:#f4f5fa;}
   *{box-sizing:border-box;}
-  body{margin:0;background:var(--bg);color:var(--ink);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;}
   .wrap{max-width:1040px;margin:0 auto;padding:16px;}
   .card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(26,35,126,.10);}
   header.h{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:24px 24px 20px;}
   header.h .top{display:flex;align-items:center;gap:14px;}
-  header.h .ball{font-size:34px;line-height:1;}
-  header.h h1{margin:0;font-size:26px;font-weight:800;letter-spacing:.3px;}
-  header.h .sub{margin-top:6px;font-size:15px;color:#c5cae9;font-weight:600;}
-  header.h .date{margin-top:2px;font-size:13.5px;color:#9fa8da;font-weight:600;}
-  .champ{background:linear-gradient(135deg,#fff4c2,#ffe58a);border-bottom:2px solid var(--gold);
-    padding:16px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
-  .champ .trophy{font-size:34px;}
-  .champ .lbl{color:#8a6d00;font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase;}
-  .champ .who{color:#5c4600;font-weight:800;font-size:22px;}
-  .champ .pts{margin-left:auto;background:#8a6d00;color:#fff;font-weight:800;border-radius:999px;padding:6px 16px;font-size:15px;}
-  .golbar{background:var(--green-bg);border-bottom:1px solid var(--green-line);padding:12px 24px;
-    display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
-  .golbar .lbl{color:var(--green);font-weight:800;font-size:14px;}
-  .golbar .chip{background:#c8e6c9;color:#1b5e20;font-weight:700;border-radius:999px;padding:4px 12px;font-size:13px;}
-  .scroll{overflow-x:auto;}
-  table{width:100%;border-collapse:collapse;min-width:920px;}
+  header.h .ball{font-size:34px;line-height:1;} header.h h1{margin:0;font-size:26px;font-weight:800;letter-spacing:.3px;}
+  header.h .sub{margin-top:6px;font-size:15px;color:#c5cae9;font-weight:600;} header.h .date{margin-top:2px;font-size:13.5px;color:#9fa8da;font-weight:600;}
+  .champ{background:linear-gradient(135deg,#fff4c2,#ffe58a);border-bottom:2px solid var(--gold);padding:16px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+  .champ .trophy{font-size:34px;} .champ .lbl{color:#8a6d00;font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase;}
+  .champ .who{color:#5c4600;font-weight:800;font-size:22px;} .champ .pts{margin-left:auto;background:#8a6d00;color:#fff;font-weight:800;border-radius:999px;padding:6px 16px;font-size:15px;}
+  .golbar{background:var(--green-bg);border-bottom:1px solid var(--green-line);padding:12px 24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .golbar .lbl{color:var(--green);font-weight:800;font-size:14px;} .golbar .chip{background:#c8e6c9;color:#1b5e20;font-weight:700;border-radius:999px;padding:4px 12px;font-size:13px;}
+  .scroll{overflow-x:auto;} table{width:100%;border-collapse:collapse;min-width:920px;}
   thead th{background:var(--navy);color:#fff;font-weight:700;font-size:12px;padding:11px 8px;text-align:center;white-space:nowrap;border-right:1px solid rgba(255,255,255,.12);}
-  thead th.name{text-align:left;padding-left:20px;min-width:200px;position:sticky;left:0;background:var(--navy);z-index:2;}
-  thead th.tot{background:#0d1442;}
+  thead th.name{text-align:left;padding-left:20px;min-width:200px;position:sticky;left:0;background:var(--navy);z-index:2;} thead th.tot{background:#0d1442;}
   tbody td{padding:10px 8px;text-align:center;font-size:14px;color:#374151;border-bottom:1px solid var(--line);border-right:1px solid var(--line);}
   tbody td.name{text-align:left;padding-left:20px;font-weight:700;color:var(--ink);position:sticky;left:0;background:#fff;z-index:1;}
-  tbody td.pos{width:40px;color:var(--muted);font-weight:800;}
-  tbody td.tot{font-weight:800;font-size:16px;color:var(--navy);background:#f7f8fd;}
+  tbody td.pos{width:40px;color:var(--muted);font-weight:800;} tbody td.tot{font-weight:800;font-size:16px;color:var(--navy);background:#f7f8fd;}
   tbody tr:hover td{background:#f0f2fb;} tbody tr:hover td.name{background:#f0f2fb;}
-  tbody tr.leader td{background:var(--gold-bg);} tbody tr.leader td.name{background:var(--gold-bg);}
-  tbody tr.leader td.tot{background:#fff2c7;color:#8a6d00;}
+  tbody tr.leader td{background:var(--gold-bg);} tbody tr.leader td.name{background:var(--gold-bg);} tbody tr.leader td.tot{background:#fff2c7;color:#8a6d00;}
   .gol-hit{color:var(--green);font-weight:800;} .gol-hit .tick{background:#c8e6c9;border-radius:6px;padding:1px 5px;margin-left:2px;font-size:11px;}
   .gol-miss{color:var(--muted);} .hit{color:var(--green);font-weight:800;}
   footer.f{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:16px 24px;background:#fafbff;border-top:1px solid var(--line);font-size:13px;color:var(--muted);}
-  footer.f .phase{background:#fff2c7;color:#8a6d00;font-weight:800;border-radius:999px;padding:5px 14px;font-size:12.5px;}
-  footer.f b{color:var(--ink);}
+  footer.f .phase{background:#fff2c7;color:#8a6d00;font-weight:800;border-radius:999px;padding:5px 14px;font-size:12.5px;} footer.f b{color:var(--ink);}
   @media(max-width:560px){header.h h1{font-size:21px;}.wrap{padding:8px;}.champ .who{font-size:19px;}}
 </style></head><body>
 <div class="wrap"><div class="card">
@@ -53,11 +38,10 @@
     <div class="date" id="fecha"></div>
   </div></div></header>
   <div class="champ"><span class="trophy">🏆</span>
-    <div><div class="lbl">Ganador de la Quiniela</div><div class="who">Jose Antonio Celis Infante</div></div>
+    <div><div class="lbl">Gran Campeón de la Quiniela</div><div class="who">Jose Antonio Celis Infante</div></div>
     <span class="pts">140 pts</span>
   </div>
-  <div class="golbar"><span class="lbl">⚽ Goleador:</span>
-    <span class="chip">Kylian Mbappé — 10 goles</span></div>
+  <div class="golbar"><span class="lbl">⚽ Goleador:</span><span class="chip">Kylian Mbappé — 10 goles</span></div>
   <div class="scroll"><table><thead><tr>
     <th class="name">Participante</th><th>Goleador</th>
     <th>1°/2° Grupo</th><th>3°s</th><th>Octavos</th><th>Cuartos</th><th>Semis</th><th>Finalistas</th>
